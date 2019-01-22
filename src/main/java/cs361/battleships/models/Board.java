@@ -112,5 +112,49 @@ public class Board {
     public void setAttacks(List<Result> attacks) {
         this.attacks = attacks;
     }
-
+	public boolean checkShips(int x, char y, boolean vertical, String kind) {
+		for(int i = 0; i < ships.size(); i++) {
+			if (ships.get(i).isTaken(x, y)) {
+				return true;
+			}
+			if(kind.equals(ships.get(i).getKind())) {
+				return true;
+			}
+			if (kind.equals("MINESWEEPER")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char) (y + 1))) {
+						return true;
+					}
+				}
+			}
+			if (kind.equals("DESTROYER")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char) (y + 1)) || ships.get(i).isTaken(x, (char) (y + 2))) {
+						return true;
+					}
+				}
+			}
+			if (kind.equals("BATTLESHIP")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y) || ships.get(i).isTaken(x + 3, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char)(y + 1)) || ships.get(i).isTaken(x,(char)(y + 2)) || ships.get(i).isTaken(x,(char)(y + 3))) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }
+
