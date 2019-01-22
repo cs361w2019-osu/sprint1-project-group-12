@@ -24,15 +24,16 @@ public class Game {
         do {
             // AI places random ships, so it might try and place overlapping ships
             // let it try until it gets it right
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship, randRow(), randCol(), randVertical());
+            Ship ship2 = new Ship(ship.getKind());
+            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
         } while (!opponentPlacedSuccessfully);
 
         return true;
     }
 
     /*
-	DO NOT change the signature of this method. It is used by the grading scripts.
-	 */
+   DO NOT change the signature of this method. It is used by the grading scripts.
+    */
     public boolean attack(int x, char  y) {
         Result playerAttack = opponentsBoard.attack(x, y);
         if (playerAttack.getResult() == INVALID) {
@@ -44,7 +45,7 @@ public class Game {
             // AI does random attacks, so it might attack the same spot twice
             // let it try until it gets it right
             opponentAttackResult = playersBoard.attack(randRow(), randCol());
-        } while(opponentAttackResult.getResult() != INVALID);
+        } while(opponentAttackResult.getResult() == INVALID);
 
         return true;
     }

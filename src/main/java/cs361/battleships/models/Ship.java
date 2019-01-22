@@ -6,19 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
-
+	private String kind = "";
 	@JsonProperty private List<Square> occupiedSquares;
 
 	public Ship() {
-		occupiedSquares = new ArrayList<>();
+		occupiedSquares = new ArrayList<Square>();
 	}
-	
+
 	public Ship(String kind) {
-		//TODO implement
+		this.kind = kind;
+		occupiedSquares = new ArrayList<>();
 	}
 
 	public List<Square> getOccupiedSquares() {
-		//TODO implement
-		return null;
+		return occupiedSquares;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public boolean isTaken( int x, char y) {
+		for(int i = 0; i < occupiedSquares.size(); i++) {
+			if(x == occupiedSquares.get(i).getRow() && y == occupiedSquares.get(i).getColumn()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
+
