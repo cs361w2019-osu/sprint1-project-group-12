@@ -34,9 +34,7 @@ public class BoardTest {
     @Test
     public void testAttack() {
         Board board = new Board();
-        assertFalse(board.placeShip(new Ship("MINESWEEPER"), 6, 'B', false));
-
-        board.placeShip(new Ship("MINESWEEPER"), 5, 'C', false);
-        assertTrue(board.attack(5, 'C').getResult() == AtackStatus.HIT);
+       assertTrue(board.attack(5, 'C').getResult() == AtackStatus.MISS);
+       assertTrue(board.attack(11, 'C').getResult() == AtackStatus.INVALID);
     }
 }
