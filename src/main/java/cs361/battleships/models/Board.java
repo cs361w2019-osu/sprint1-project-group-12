@@ -129,7 +129,6 @@ public class Board {
 		attacks.add(result);
 		return result;
 	}
-
 	public List<Ship> getShips() {
 		return ships;
 	}
