@@ -33,8 +33,8 @@ public class Game {
     }
 
     /*
-	DO NOT change the signature of this method. It is used by the grading scripts.
-	 */
+   DO NOT change the signature of this method. It is used by the grading scripts.
+    */
     public boolean attack(int x, char  y) {
         Result playerAttack = opponentsBoard.attack(x, y);
         if (playerAttack.getResult() == INVALID) {

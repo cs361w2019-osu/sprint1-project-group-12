@@ -21,7 +21,7 @@ public class Square {
 	public void setColumn(char column) {
 		this.column = column;
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
@@ -30,3 +30,4 @@ public class Square {
 		this.row = row;
 	}
 }
+
