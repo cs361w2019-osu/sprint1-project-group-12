@@ -1,76 +1,39 @@
 package cs361.battleships.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
+import cs361.battleships.models.AtackStatus;
+
+public class Result {
+
+	//private AtackStatus currentattk;
+	//private Ship 		currentship;
+	//private Square		currentsq;
 
 
-import static cs361.battleships.models.AtackStatus.*;
 
-public class Game {
+		public AtackStatus getResult() {
+			//TODO implement
+			return null;
+		}
 
-    @JsonProperty private Board playersBoard = new Board();
-    @JsonProperty private Board opponentsBoard = new Board();
+		public void setResult(AtackStatus result) {
+			//TODO implement
+		}
 
+		public Ship getShip() {
+			//TODO implement
+			return null;
+		}
 
-	//DO NOT change the signature of this method. It is used by the grading scripts.
+		public void setShip(Ship ship) {
+			//TODO implement
+		}
 
-    public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
+		public Square getLocation() {
+			//TODO implement
+			return null;
+		}
 
-
-        boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
-       if (!successful) {
-           return false;
-        }
-
-        Ship compShip = new Ship(ship.getname());
-       boolean opponentPlacedSuccessfully = false;
-        do {
-            // AI places random ships, so it might try and place overlapping ships
-            // let it try until it gets it right
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(compShip, randRow(), randCol(), randVertical());
-       } while (!opponentPlacedSuccessfully);
-
-        return true;
-    }
-
-
-	//DO NOT change the signature of this method. It is used by the grading scripts.
-
-    public boolean attack(int x, char  y) {
-        Result playerAttack = opponentsBoard.attack(x, y);
-        if (playerAttack.getResult() == INVALID) {
-            return false;
-        }
-
-        Result opponentAttackResult;
-        do {
-            // AI does random attacks, so it might attack the same spot twice
-            // let it try until it gets it right
-            opponentAttackResult = playersBoard.attack(randRow(), randCol());
-        } while(opponentAttackResult.getResult() != INVALID);
-
-        return true;
-    }
-            //Return A-J, ASCII 65-74: ((0-9)+65)
-    private char randCol() {
-            int numCol = (int)(Math.random()*9+65);
-            return (char)numCol;
-        }
-            //Return 1-10 ((0-9)+1)
-    private int randRow() {
-             int numRow = (int)(Math.random()*9+1);
-             return numRow;
-    }
-            //Return boolean
-    private boolean randVertical() {
-
-
-            Random rand = new Random();
-            boolean vert = false;
-            vert = rand.nextBoolean();
-        return vert;
-    }
-
-    }
+		public void setLocation(Square square) {
+			//TODO implement
+		}
+	}
