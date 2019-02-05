@@ -108,57 +108,57 @@ body {
 }
 
 #ship-holder {
-    min-width: 225px;
-    max-width: 300px;
-    margin: 10px 10px auto 10px;
-    padding: 10px;
+    background-color: #D3D3D3;
+    min-width: 15%;
+    max-width: 23%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: top;
     padding-top: 0;
     margin-top: 0;
     border-radius: 3px;
-    background-color: #efefef;
-    display: inline-block;
-    vertical-align: top;
+
+
 }
 
-input[type=checkbox].switch {
+.switch {
     margin-top: 5%;
     appearance: none;
+    cursor: pointer;
     -moz-appearance: none;
     -webkit-appearance: none;
-    width: 6em;
-    height: 1em;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: 27px;
     border-radius: 3em;
-    background-color: #00FF00;
+    background-color: #00FFFF;
     outline: 0;
     position: relative;
-    transition: background-color 0.10s ease-in-out;
 }
 
-input[type=checkbox].switch:checked {
-    background-color: #3af;
-}
-
-input[type=checkbox].switch::after {
-    content: '';
-    width: 3em;
-    height: 1em;
-    background-color: white;
+.switch::after {
+    font-size: 19px;
+    content: 'Horizontal';
+    width: 105px;
+    height: 27px;
+    background-color: black;
+    color: white;
+    text-align: center;
     border-radius: 3em;
     position: absolute;
     transform: scale(0.7);
-    left: 0;
-    transition: left 0.10s ease-in-out;
+    margin-left: 0;
+    left: -13px;
+    transition: left 0.15s ease-in-out;
 }
 
-input[type=checkbox].switch:checked::after {
-    left: 3em;
-}
+.switch:checked::after {
+    left: 48%;
+    text-align: center;
+    content: 'Vertical';
 
-.switch-text {
-    font-size: 16px;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 5%;
 }
 
 #switch-holder {
