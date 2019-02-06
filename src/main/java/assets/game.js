@@ -69,8 +69,25 @@ function cellClick() {
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
+            if(shipType === "MINESWEEPER") {
+                document.getElementById("place_minesweeper").removeEventListener("click", minesweeper);
+                var name = document.getElementById("place_minesweeper");
+                name.className = "grayout";
+            }
+            if(shipType === "DESTROYER") {
+                document.getElementById("place_destroyer").removeEventListener("click", destroyer);
+                var name = document.getElementById("place_destroyer");
+                name.className = "grayout";
+            }
+            if(shipType === "BATTLESHIP") {
+                document.getElementById("place_battleship").removeEventListener("click", battleship);
+                var name = document.getElementById("place_battleship");
+                name.className = "grayout";
+            }
             placedShips++;
             if (placedShips == 3) {
+                var shipDiv = document.getElementById("ship-holder");
+                shipDiv.style.display = "none";
                 isSetup = false;
                 registerCellListener((e) => {});
             }
@@ -125,21 +142,39 @@ function place(size) {
 }
 
 function initGame() {
+    let mineFlag = false;
+    let destFlag = false;
+    let battFlag = false;
     makeGrid(document.getElementById("opponent"), false);
     makeGrid(document.getElementById("player"), true);
-    document.getElementById("place_minesweeper").addEventListener("click", function(e) {
-        shipType = "MINESWEEPER";
-       registerCellListener(place(2));
-    });
-    document.getElementById("place_destroyer").addEventListener("click", function(e) {
-        shipType = "DESTROYER";
-       registerCellListener(place(3));
-    });
-    document.getElementById("place_battleship").addEventListener("click", function(e) {
-        shipType = "BATTLESHIP";
-       registerCellListener(place(4));
-    });
+    document.getElementById("place_minesweeper").addEventListener("click", minesweeper);
+    document.getElementById("place_destroyer").addEventListener("click", destroyer);
+    document.getElementById("place_battleship").addEventListener("click", battleship);
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
+    if(mineFlag === true) {
+        console.log("works");
+
+    }
+
 };
+
+function minesweeper() {
+    shipType = "MINESWEEPER";
+    registerCellListener(place(2));
+};
+
+function destroyer() {
+    shipType = "DESTROYER";
+    registerCellListener(place(3));
+    document.getElementById("place_minesweeper").removeEventListener("click", destroyer);
+
+}
+
+function battleship() {
+    shipType = "BATTLESHIP";
+    registerCellListener(place(4));
+    document.getElementById("place_minesweeper").removeEventListener("click", battleship);
+
+}
