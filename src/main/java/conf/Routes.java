@@ -11,6 +11,7 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {
 
+
         router.GET().route("/").with(ApplicationController::index);
         router.GET().route("/game").with(ApplicationController::newGame);
         router.POST().route("/place").with(ApplicationController::placeShip);
