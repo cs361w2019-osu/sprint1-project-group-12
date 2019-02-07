@@ -3,6 +3,14 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var player_hit = 0;
+var player_miss = 0;
+var player_sunk = 0;
+var enemy_hit = 0;
+var enemy_miss = 0;
+var enemy_sunk = 0;
+var player = 1;
+var enemy = 2;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -17,18 +25,37 @@ function makeGrid(table, isPlayer) {
 }
 
 function markHits(board, elementId, surrenderText) {
+
+    var result = 0;
+
     board.attacks.forEach((attack) => {
         let className;
-        if (attack.result === "MISS")
+        if (attack.result === "MISS"){
             className = "miss";
-        else if (attack.result === "HIT")
+            result = 1;
+
+        }else if (attack.result === "HIT"){
             className = "hit";
-        else if (attack.result === "SUNK")
+            result = 2;
+
+        }else if (attack.result === "SUNK"){
             className = "hit"
-        else if (attack.result === "SURRENDER")
+                result = 3;
+
+        }else if (attack.result === "SURRENDER"){
             alert(surrenderText);
+        }
+
+        if (elementId == "player"){
+            player = 1;
+        }else if (elementId == "opponent"){
+            player = 2;
+        }
+
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
     });
+
+    updatelog(player, result);
 }
 
 function redrawGrid() {
@@ -87,7 +114,9 @@ function cellClick() {
             placedShips++;
             if (placedShips == 3) {
                 var shipDiv = document.getElementById("ship-holder");
+                var statsDiv = document.getElementById("stats-holder");
                 shipDiv.style.display = "none";
+                statsDiv.style.display = "block";
                 isSetup = false;
                 registerCellListener((e) => {});
             }
@@ -178,3 +207,44 @@ function battleship() {
     document.getElementById("place_minesweeper").removeEventListener("click", battleship);
 
 }
+
+
+function updatelog(player,result){
+    if (player == 2){
+        change_player(result);
+    }else if (player == 1){
+        change_enemy(result);
+    }
+}
+
+function change_player(result){
+    if (result == 1){
+        enemy_miss += 1;
+        document.getElementById("enemy_miss").innerHTML = "Miss: " + enemy_miss;
+    }else if (result == 2){
+        enemy_hit += 1;
+        document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+    }else if (result == 3){
+        enemy_sunk += 1;
+        enemy_hit += 1;
+        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
+        document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+    }
+}
+
+function change_enemy(result){
+    if (result == 1){
+        player_miss += 1;
+        document.getElementById("player_miss").innerHTML = "Miss: " + player_miss;
+    }else if (result == 2){
+        player_hit += 1;
+        document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
+    }else if (result == 3){
+        player_sunk += 1;
+        enemy_hit += 1;
+        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
+        document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
+    }
+}
+
+
