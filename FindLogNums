@@ -1,0 +1,75 @@
+function markHits(board, elementId, surrenderText) {
+
+
+
+//RESET on each turn.. Create global versions up top
+playhit = 0;  comphit=0;
+playmiss=0;   compmiss=0;
+playsink=0;   compsink=0;
+
+
+//Each turn, this loop goes through all previous attacks
+//NOTE: if elementId = opponent, that is the players move.. if elementId = player that is the computers move
+
+    board.attacks.forEach((attack) => {
+        let className;
+        if (attack.result === "MISS"){
+            className = "miss";
+
+            //incrementing player/comp miss variables..
+            if(elementId==="opponent")
+            playmiss = playmiss+1
+            if(elementId==="player")
+            compmiss = compmiss+1
+         }
+        else if (attack.result === "HIT"){
+            className = "hit";
+            
+            //incrementing player/comp hit variables..
+            if(elementId==="opponent")
+            playhit = playhit+1
+            if(elementId==="player")
+            comphit = comphit+1
+         }
+        else if (attack.result === "SUNK"){
+            className = "sink"
+
+            //incrementing player/comp sunk variables..
+            if(elementId==="opponent")
+            playsink = playsink+1
+            if(elementId==="player")
+            compsink = compsink+1
+            }
+
+        else if (attack.result === "SURRENDER"){
+             alert(surrenderText);
+             location.reload(true)
+         }
+
+        document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+    });
+    
+//Where these alerts are is where to send to the 'replace text functions'
+//With this setup the 'replace text' functions now must take all three variables each time like so:
+//                                                                     Function playerText(playmiss, playhit, playsink)
+
+//instead of alert will be playText(playmiss, playhit, playsink)
+    if(elementId==="opponent")
+    alert("Player values (M/H/S):      " + playmiss + "/"+playhit+ "/"+playsink)
+
+//instead of alert will be CompText(compmiss, comphit, compsink)
+    if(elementId==="player")
+    alert("Computer values (M/H/S):    " + compmiss + "/"+comphit+"/"+compsink)
+}
+//
+//
+//Your 'setText functions should now look like this..'
+//
+//    PlayText(playmiss, playhit, playsink)
+//    {
+//
+//     document.getElementById("PLAYMISS ID").innerHTML=playmiss;
+//     document.getElementById("PLAYHIT ID").innerHTML=playhit;
+//     document.getElementById("PLAYSINK ID").innerHTML=playsink;
+//    }
+//
