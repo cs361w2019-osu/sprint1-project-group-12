@@ -88,6 +88,27 @@ td:hover {
 
 .content {
     display: flex;
+    position: fixed;
+}
+
+.g_l{
+    position: fixed;
+}
+
+.grid-label{
+    margin-top: 10px;
+    margin-bottom: 12 px;
+}
+.top{
+    position: fixed;
+}
+.top-label{
+    text-indent : 25px;
+    letter-spacing:9px
+}
+
+div {
+ display: block;
 }
 
 body {
@@ -106,10 +127,15 @@ body {
     padding-top: 30px;
 
 }
+.footer{
+    position:fixed;
+    left: 0;
+    bottom: 0;
+}
 
 #ship-holder {
     background-color: #D3D3D3;
-    min-width: 15%;
+    min-width: 225px;
     max-width: 23%;
     padding-left: 10px;
     padding-right: 10px;
