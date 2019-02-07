@@ -148,6 +148,22 @@ body {
 
 }
 
+#stats-holder {
+    background-color: #D3D3D3;
+    min-width: 225px;
+    max-width: 23%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 0;
+    margin-top: 0;
+    border-radius: 3px;
+    display: none;
+
+
+}
+
 .switch {
     margin-top: 5%;
     appearance: none;

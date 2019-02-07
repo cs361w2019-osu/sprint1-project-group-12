@@ -3,6 +3,13 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var player_hit = 0;
+var player_miss = 0;
+var player_sunk = 0;
+var enemy_hit = 0;
+var enemy_miss = 0;
+var enemy_sunk = 0;
+var player = 1;
 var message="blank";
 var opacity=1;
 
@@ -19,6 +26,8 @@ function makeGrid(table, isPlayer) {
 }
 
 function markHits(board, elementId, surrenderText) {
+
+    var result = 0;
     var loop = 0;
 //alert(loop)
 
@@ -28,27 +37,32 @@ function markHits(board, elementId, surrenderText) {
         if (attack.result === "MISS"){
             className = "miss";
             message="You missed"
-         }
-        else if (attack.result === "HIT"){
+            result = 1;
+
+        }else if (attack.result === "HIT"){
             className = "hit";
             message="You hit the opponents ship!"
-         }
-        else if (attack.result === "SUNK"){
+            result = 2;
+
+        }else if (attack.result === "SUNK"){
             className = "sink"
             message="You have SUNK an opponents ship!!"
-            }
+                result = 3;
 
-        else if (attack.result === "SURRENDER"){
-             alert(surrenderText);
-             location.reload(true)
-         }
+        }else if (attack.result === "SURRENDER"){
+            alert(surrenderText);
+        }
+
+        if (elementId == "player"){
+            player = 1;
+        }else if (elementId == "opponent"){
+            player = 2;
+        }
+
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
     });
 
-
-
-
-
+      updatelog(player, result);
 
 }
 
@@ -111,9 +125,13 @@ function cellClick() {
             placedShips++;
             if (placedShips == 3) {
                 var shipDiv = document.getElementById("ship-holder");
+                var statsDiv = document.getElementById("stats-holder");
                 shipDiv.style.display = "none";
-                                 document.getElementById("myInfo").innerHTML="Now Attacking:";
-                 document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
+
+                statsDiv.style.display = "block";
+                document.getElementById("myInfo").innerHTML="Now Attacking:";
+                document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
+
                 isSetup = false;
                 registerCellListener((e) => {});
             }
@@ -265,3 +283,44 @@ function battleship() {
     document.getElementById("place_minesweeper").removeEventListener("click", battleship);
 
 }
+
+
+function updatelog(player,result){
+    if (player == 2){
+        change_player(result);
+    }else if (player == 1){
+        change_enemy(result);
+    }
+}
+
+function change_player(result){
+    if (result == 1){
+        enemy_miss += 1;
+        document.getElementById("enemy_miss").innerHTML = "Miss: " + enemy_miss;
+    }else if (result == 2){
+        enemy_hit += 1;
+        document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+    }else if (result == 3){
+        enemy_sunk += 1;
+        enemy_hit += 1;
+        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
+        document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+    }
+}
+
+function change_enemy(result){
+    if (result == 1){
+        player_miss += 1;
+        document.getElementById("player_miss").innerHTML = "Miss: " + player_miss;
+    }else if (result == 2){
+        player_hit += 1;
+        document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
+    }else if (result == 3){
+        player_sunk += 1;
+        enemy_hit += 1;
+        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
+        document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
+    }
+}
+
+
