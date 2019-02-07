@@ -50,7 +50,9 @@ function markHits(board, elementId, surrenderText) {
                 result = 3;
 
         }else if (attack.result === "SURRENDER"){
-            alert(surrenderText);
+            result = 4;
+            //alert(surrenderText);
+
         }
 
         if (elementId == "player"){
@@ -62,7 +64,7 @@ function markHits(board, elementId, surrenderText) {
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
     });
 
-      updatelog(player, result);
+    updatelog(player, result,surrenderText);
 
 }
 
@@ -239,13 +241,6 @@ function hidemessage(){
 }
 
 
-
-
-
-
-
-
-
 function initGame() {
     let mineFlag = false;
     let destFlag = false;
@@ -285,15 +280,15 @@ function battleship() {
 }
 
 
-function updatelog(player,result){
+function updatelog(player,result,surrenderText){
     if (player == 2){
-        change_player(result);
+        change_player(result,surrenderText);
     }else if (player == 1){
-        change_enemy(result);
+        change_enemy(result,surrenderText);
     }
 }
 
-function change_player(result){
+function change_player(result,surrenderText){
     if (result == 1){
         enemy_miss += 1;
         document.getElementById("enemy_miss").innerHTML = "Miss: " + enemy_miss;
@@ -305,10 +300,14 @@ function change_player(result){
         enemy_hit += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
         document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+    }else if (result == 4){
+        enemy_sunk += 1;
+        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
+        alert(surrenderText)
     }
 }
 
-function change_enemy(result){
+function change_enemy(result,surrenderText){
     if (result == 1){
         player_miss += 1;
         document.getElementById("player_miss").innerHTML = "Miss: " + player_miss;
@@ -317,9 +316,13 @@ function change_enemy(result){
         document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
     }else if (result == 3){
         player_sunk += 1;
-        enemy_hit += 1;
+        player_hit += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
         document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
+    }else if (result == 4){
+        player_sunk += 1;
+        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
+        alert(surrenderText)
     }
 }
 
