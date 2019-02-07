@@ -3,6 +3,8 @@ var placedShips = 0;
 var game;
 var shipType;
 var vertical;
+var message="blank";
+var opacity=1;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -17,18 +19,37 @@ function makeGrid(table, isPlayer) {
 }
 
 function markHits(board, elementId, surrenderText) {
+    var loop = 0;
+//alert(loop)
+
     board.attacks.forEach((attack) => {
+    loop +=1
         let className;
-        if (attack.result === "MISS")
+        if (attack.result === "MISS"){
             className = "miss";
-        else if (attack.result === "HIT")
+            message="You missed"
+         }
+        else if (attack.result === "HIT"){
             className = "hit";
-        else if (attack.result === "SUNK")
-            className = "hit"
-        else if (attack.result === "SURRENDER")
-            alert(surrenderText);
+            message="You hit the opponents ship!"
+         }
+        else if (attack.result === "SUNK"){
+            className = "sink"
+            message="You have SUNK an opponents ship!!"
+            }
+
+        else if (attack.result === "SURRENDER"){
+             alert(surrenderText);
+             location.reload(true)
+         }
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
     });
+
+
+
+
+
+
 }
 
 function redrawGrid() {
@@ -44,6 +65,8 @@ function redrawGrid() {
         document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }));
     markHits(game.opponentsBoard, "opponent", "You won the game");
+  //  alert("marking your board yo!!")
+          fastmessage(message);
     markHits(game.playersBoard, "player", "You lost the game");
 }
 
@@ -66,6 +89,7 @@ function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
     if (isSetup) {
+                message="You placed a ship"
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
@@ -88,6 +112,8 @@ function cellClick() {
             if (placedShips == 3) {
                 var shipDiv = document.getElementById("ship-holder");
                 shipDiv.style.display = "none";
+                                 document.getElementById("myInfo").innerHTML="Now Attacking:";
+                 document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
                 isSetup = false;
                 registerCellListener((e) => {});
             }
@@ -104,8 +130,25 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            alert("Cannot complete the action");
+            //NEW "ALERT!!"T!
+                  if (req.status != 200) {
+                        if(isSetup){
+                        message="Please choose a valid location!"
+                             for(var i = 0; i < placedShips; i++){
+                                             if(game.playersBoard.ships[i].kind == data.shipType)
+                                             message="Please choose a new type of ship!!"
+                                             }
+                              if(!shipType){
+                              message="Please choose a ship to place!!"
+                              }
+                        }
+                        if(!isSetup)
+                                message="Please choose a new square"
+                        errormessage(message);
+
+           // alert("Cannot complete the action");
             return;
+        }
         }
         handler(JSON.parse(req.responseText));
     });
@@ -140,6 +183,50 @@ function place(size) {
         }
     }
 }
+
+
+function fastmessage(message){
+
+ //document.getElementById("myPopup").style.display="inline";
+ document.getElementById("myPopup").innerHTML=message;
+ document.getElementById("myPopup").style.opacity=1
+ opacity=1
+ window.setTimeout("hidemessage()", 200);
+//alert("sending fast!!")
+
+ }
+
+ function errormessage(message){
+
+ //document.getElementById("myPopup").style.display="inline";
+ document.getElementById("myPopup").innerHTML=message;
+ document.getElementById("myPopup").style.backgroundColor="red";
+ document.getElementById("myPopup").style.opacity=1
+ opacity=1
+ window.setTimeout("hidemessage()", 1100);
+ }
+
+function hidemessage(){
+   opacity -= 0.1
+ document.getElementById('myPopup').style.opacity=opacity;
+//alert(opacity)
+    if (opacity < 0)
+        {
+        opacity = 1;
+        // document.getElementById('myPopup').style.opacity=opacity;
+          document.getElementById("myPopup").style.backgroundColor="grey";
+         return;}
+
+    setTimeout("hidemessage()", 50)
+}
+
+
+
+
+
+
+
+
 
 function initGame() {
     let mineFlag = false;

@@ -164,3 +164,23 @@ body {
 #switch-holder {
     margin-top: 5%;
 }
+
+.popup {
+  position: relative;
+  display: inline-block;
+/*  cursor: none;*/
+}
+
+.popup .popuptext {
+ position: absolute;
+ opacity: 1;
+width: 160px;
+color: #fff;
+background:grey;
+text-align: center;
+padding: 10px 0;
+z-index: 1;
+bottom: 75%;
+left: 10%;
+margin-left: 60px;
+}
