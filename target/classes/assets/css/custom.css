@@ -2,10 +2,14 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    margin-right: 15px;
-    margin-left: 15px;
+    margin-right: 25px;
+    margin-left: 25px;
     border: 1px solid black;
     border-spacing: 0px;
+}
+
+#opponent {
+    margin-right: 0px;
 }
 
 .battleGrid tr {
@@ -110,7 +114,7 @@ td:hover {
 }
 .top-label{
     font-size: 16px;
-    text-indent : 13.5px;
+    text-indent : 24.5px;
     letter-spacing: 10.15px
 }
 
