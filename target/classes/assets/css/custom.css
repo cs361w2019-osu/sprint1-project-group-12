@@ -2,14 +2,10 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    margin-right: 25px;
-    margin-left: 25px;
+    margin-right: 2%;
+    margin-left: 2%;
     border: 1px solid black;
     border-spacing: 0px;
-}
-
-#opponent {
-    margin-right: 0px;
 }
 
 .battleGrid tr {
@@ -95,32 +91,20 @@ td:hover {
     position: fixed;
 }
 
-
-.g_l {
+.g_l{
     position: fixed;
-    margin-left: 5px;
-    margin-top: 8.5px;
-}
-
-.other {
-    margin-left: 5px;
-    margin-top: 8.5px;
 }
 
 .grid-label{
-    margin-bottom: 11.8px;
-
+    margin-top: 10px;
+    margin-bottom: 12 px;
 }
 .top{
     position: fixed;
 }
 .top-label{
-
-    font-size: 16px;
-    text-indent : 24.5px;
-    letter-spacing: 10.15px
-
-
+    text-indent : 25px;
+    letter-spacing:9px
 }
 
 div {
