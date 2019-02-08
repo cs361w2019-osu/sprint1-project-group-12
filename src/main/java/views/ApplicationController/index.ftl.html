@@ -2,21 +2,38 @@
 <@layout.myLayout "Home page">    
 
 
-<h1>The Battleship game</h1>
+<h1 id="head">The Battleship Game</h1>
+<div class="content">
+    <table id="player" class="battleGrid">
 
-<table id="opponent" class="battleGrid">
-</table>
+    </table>
+    <div id="ship-holder">
+        <div id="minesweeper" class="place-text">Minesweeper</div>
+        <div><button id="place_minesweeper" class="unplaced">⬛⬛</button></div>
+        <div id="destroyer" class="place-text">Destroyer</div>
+        <div><button id="place_destroyer" class="unplaced">⬛⬛⬛</button></div>
+        <div id="battleship" class="place-text">Battleship</div>
+        <div><button id="place_battleship" class="unplaced">⬛⬛⬛⬛</button></div>
+        <div id="switch-holder">
+            <input type="checkbox" class="switch" id="is_vertical"></input>
+        </div>
+    </div>
+    <div id="stats-holder">
+        <div id="stats" class="place-text">Stats</div>
+        <div id="player1" class="place-text">Your stats</div>
+        <div id="your-hit" class="stats">Hits: 0</div>
+        <div id="your-miss" class="stats">Misses: 0</div>
+        <div id="your-sunk" class="stats">Ships Sunk: 0</div>
+        <div id="opponent1" class="place-text">Opponent's stats</div>
+        <div id="opponent-hit" class="stats">Hits: 0</div>
+        <div id="opponent-miss" class="stats">Misses: 0</div>
+        <div id="opponent-sunk" class="stats">Ships Sunk: 0</div>
+    </div>
+    <table id="opponent" class="battleGrid">
+    </table>
 
-<table id="player" class="battleGrid">
-</table>
 
-<ul>
-    <li><button id="place_minesweeper">Place Minesweeper</button></li>
-    <li><button id="place_destroyer">Place Destroyer</button></li>
-    <li><button id="place_battleship">Place Battleship</button></li>
-    <li><input type="checkbox" id="is_vertical">Vertical</input></li>
-</ul>
-
+</div>
 <script type="text/javascript" src="/assets/game.js"></script>
 <script>
     initGame();
