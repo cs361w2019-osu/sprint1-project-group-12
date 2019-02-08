@@ -303,7 +303,13 @@ function change_player(result,surrenderText){
     }else if (result == 4){
         enemy_sunk += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
-        alert(surrenderText)
+        setTimeout(function(){
+            alert(surrenderText);
+        },1000);
+        setTimeout(function(){
+             location.reload(true);
+        },2000);
+
     }
 }
 
@@ -322,7 +328,12 @@ function change_enemy(result,surrenderText){
     }else if (result == 4){
         player_sunk += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        alert(surrenderText)
+        setTimeout(function(){
+            alert(surrenderText);
+        },1000);
+        setTimeout(function(){
+            location.reload(true);
+        },2000);
     }
 }
 

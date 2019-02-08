@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="461f64bf-ee09-4c28-a5b0-2968bffc083f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/assets/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assets/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/views/ApplicationController/index.ftl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/ApplicationController/index.ftl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/battleships-0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/assets/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assets/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/assets/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assets/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/ApplicationController/index.ftl.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/ApplicationController/index.ftl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/layout/footer.ftl.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/layout/footer.ftl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-battleships-0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-cs361.battleships.models.BoardTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/cs361.battleships.models.BoardTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cs361/battleships/models/BoardTest.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/assets/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="303" column="24" lean-forward="true" selection-start-line="303" selection-start-column="24" selection-end-line="303" selection-end-column="24" />
+            <state relative-caret-position="367">
+              <caret line="335" column="8" lean-forward="true" selection-start-line="335" selection-start-column="8" selection-end-line="335" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -51,6 +33,12 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>surrender</find>
+      <find>location</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,79 +63,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="ApplicationController" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sprint1-project-group-12" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sprint1-project-group-12" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -258,8 +180,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.15436241" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15369128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -289,8 +212,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/assets/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="303" column="24" lean-forward="true" selection-start-line="303" selection-start-column="24" selection-end-line="303" selection-end-column="24" />
+        <state relative-caret-position="367">
+          <caret line="335" column="8" lean-forward="true" selection-start-line="335" selection-start-column="8" selection-end-line="335" selection-end-column="8" />
         </state>
       </provider>
     </entry>
