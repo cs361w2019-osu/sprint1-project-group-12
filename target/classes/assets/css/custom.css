@@ -95,6 +95,7 @@ td:hover {
     position: fixed;
 }
 
+
 .g_l {
     position: fixed;
     margin-left: 5px;
@@ -108,14 +109,18 @@ td:hover {
 
 .grid-label{
     margin-bottom: 11.8px;
+
 }
 .top{
     position: fixed;
 }
 .top-label{
+
     font-size: 16px;
     text-indent : 24.5px;
     letter-spacing: 10.15px
+
+
 }
 
 div {
