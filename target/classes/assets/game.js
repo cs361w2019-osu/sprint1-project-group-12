@@ -302,14 +302,8 @@ function change_player(result,surrenderText){
         document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
     }else if (result == 4){
         enemy_sunk += 1;
-        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-             location.reload(true);
-        },2000);
-
+        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + player_sunk;
+        alert(surrenderText)
     }
 }
 
@@ -328,12 +322,7 @@ function change_enemy(result,surrenderText){
     }else if (result == 4){
         player_sunk += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-            location.reload(true);
-        },2000);
+        alert(surrenderText)
     }
 }
 
