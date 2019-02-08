@@ -50,7 +50,6 @@ function markHits(board, elementId, surrenderText) {
                 result = 3;
 
         }else if (attack.result === "SURRENDER"){
-            //alert(surrenderText);
             result = 4;
             //alert(surrenderText);
 
@@ -230,19 +229,16 @@ function fastmessage(message){
 function hidemessage(){
    opacity -= 0.1
  document.getElementById('myPopup').style.opacity=opacity;
-
 //alert(opacity)
     if (opacity < 0)
         {
         opacity = 1;
         // document.getElementById('myPopup').style.opacity=opacity;
-
           document.getElementById("myPopup").style.backgroundColor="grey";
          return;}
 
     setTimeout("hidemessage()", 50)
 }
-
 
 
 function initGame() {
@@ -284,9 +280,6 @@ function battleship() {
 }
 
 
-
-
-
 function updatelog(player,result,surrenderText){
     if (player == 2){
         change_player(result,surrenderText);
@@ -310,18 +303,11 @@ function change_player(result,surrenderText){
     }else if (result == 4){
         enemy_sunk += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + player_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-             location.reload(true);
-        },2000);
+        alert(surrenderText)
     }
 }
 
-
 function change_enemy(result,surrenderText){
-
     if (result == 1){
         player_miss += 1;
         document.getElementById("player_miss").innerHTML = "Miss: " + player_miss;
@@ -329,18 +315,14 @@ function change_enemy(result,surrenderText){
         player_hit += 1;
         document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
     }else if (result == 3){
+        player_sunk += 1;
         player_hit += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
         document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
     }else if (result == 4){
         player_sunk += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-            location.reload(true);
-        },2000);
+        alert(surrenderText)
     }
 }
 
