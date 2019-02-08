@@ -2,8 +2,8 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    margin-right: 2%;
-    margin-left: 2%;
+    margin-right: 15px;
+    margin-left: 15px;
     border: 1px solid black;
     border-spacing: 0px;
 }
@@ -88,6 +88,34 @@ td:hover {
 
 .content {
     display: flex;
+    position: fixed;
+}
+
+.g_l {
+    position: fixed;
+    margin-left: 5px;
+    margin-top: 8.5px;
+}
+
+.other {
+    margin-left: 5px;
+    margin-top: 8.5px;
+}
+
+.grid-label{
+    margin-bottom: 11.8px;
+}
+.top{
+    position: fixed;
+}
+.top-label{
+    font-size: 16px;
+    text-indent : 13.5px;
+    letter-spacing: 10.15px
+}
+
+div {
+ display: block;
 }
 
 body {
@@ -106,10 +134,15 @@ body {
     padding-top: 30px;
 
 }
+.footer{
+    position:fixed;
+    left: 0;
+    bottom: 0;
+}
 
 #ship-holder {
     background-color: #D3D3D3;
-    min-width: 15%;
+    min-width: 225px;
     max-width: 23%;
     padding-left: 10px;
     padding-right: 10px;
@@ -118,6 +151,22 @@ body {
     padding-top: 0;
     margin-top: 0;
     border-radius: 3px;
+
+
+}
+
+#stats-holder {
+    background-color: #D3D3D3;
+    min-width: 225px;
+    max-width: 23%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 0;
+    margin-top: 0;
+    border-radius: 3px;
+    display: none;
 
 
 }
@@ -173,14 +222,52 @@ body {
 
 .popup .popuptext {
  position: absolute;
- opacity: 1;
+ opacity: 0;
 width: 160px;
 color: #fff;
 background:grey;
 text-align: center;
 padding: 10px 0;
 z-index: 1;
-bottom: 75%;
+bottom: 60%;
 left: 10%;
-margin-left: 60px;
+margin-left: 10px;
+}
+
+.info {
+  position: relative;
+  display: inline-block;
+
+/*  cursor: none;*/
+}
+.info .infotext {
+ position: absolute;
+ opacity: 1;
+width: 160px;
+color: #000;
+background: none;
+text-align: center;
+outline-style: dotted;
+  outline-color: blue;
+  outline-width:3px;
+padding: 5px 10px;
+margin-left:10px;
+z-index: 10;
+bottom: 45%;
+left: 10%;
+font-weight: bold;
+}
+
+.info .infotext2 {
+ position: absolute;
+ opacity: 1;
+width: 160px;
+color: #000;
+background: none;
+text-align: center;
+padding: 5px 10px;
+margin-left:10px;
+z-index: 10;
+bottom: 5%;
+left: 10%;
 }

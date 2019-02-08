@@ -227,11 +227,9 @@ function fastmessage(message){
 function hidemessage(){
    opacity -= 0.1
  document.getElementById('myPopup').style.opacity=opacity;
-//alert(opacity)
     if (opacity < 0)
         {
         opacity = 1;
-        // document.getElementById('myPopup').style.opacity=opacity;
           document.getElementById("myPopup").style.backgroundColor="grey";
          return;}
 
