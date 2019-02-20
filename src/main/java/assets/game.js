@@ -12,6 +12,7 @@ var enemy_sunk = 0;
 var player = 1;
 var message="blank";
 var opacity=1;
+var check_sonar = 0;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -300,6 +301,9 @@ function change_player(result,surrenderText){
         enemy_hit += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
         document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+        /*if (enemy_sunk == 1) {
+            place_sonar();
+        }*/
     }else if (result == 4){
         enemy_sunk += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
@@ -335,6 +339,33 @@ function change_enemy(result,surrenderText){
             location.reload(true);
         },2000);
     }
+}
+
+function place_sonar(){
+    document.getElementById("place_player_sonar").addEventListener("click", check_square);
+    check_sonar += 1;
+    if (check_sonar == 2){
+        document.getElementById().removeEventListener("click");
+    }
+}
+
+
+function check_square(){
+    let row = this.parentNode.rowIndex + 1;
+    let col = String.fromCharCode(this.cellIndex + 65);
+    let table = document.getElementById("opponent");
+    let j=0;
+    let x = row-3;
+    var req = new XMLHttpRequest();
+    cell = table.rows[row].cells[col];
+
+    for (let i=0; i< 5; i++){
+        sendXhr("POST", "/view", {game: game, row: x+i, col: y}, function(data) {
+             game = data;
+             redrawGrid();
+        })
+    }
+
 }
 
 

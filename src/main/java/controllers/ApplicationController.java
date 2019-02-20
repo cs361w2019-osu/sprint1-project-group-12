@@ -39,4 +39,14 @@ public class ApplicationController {
             return Results.badRequest();
         }
     }
+
+    public  Result view(Context Context, ViewGameAction g) {
+        Game game = g.getGame();
+        boolean result = game.view(g.getActionRow(), g.getActionColumn());
+        if (result) {
+            return Results.json().render(game);
+        } else {
+            return Results.badRequest();
+        }
+    }
 }

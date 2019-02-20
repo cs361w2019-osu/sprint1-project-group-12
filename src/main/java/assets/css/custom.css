@@ -275,3 +275,38 @@ z-index: 10;
 bottom: 5%;
 left: 10%;
 }
+
+.sonar{
+position: relative:
+display: inline-block;
+right: 20%
+buttom: 5%;
+}
+.sonar.buttondisable{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    opacity: 0.6;
+    cursor: not-allowed;
+    bottom: 5%;
+}
+.sonar.buttonable{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    opacity: 1.0;
+    cursor: pointer;
+
+}

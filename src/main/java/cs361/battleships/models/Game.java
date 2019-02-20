@@ -51,6 +51,15 @@ public class Game {
         return true;
     }
 
+    public boolean view(int x, char y) {
+        Result placesonar = opponentsBoard.view(x, y);
+        if (placesonar.getViewSonar() == INVALID) {
+            return false;
+        }
+
+        return true;
+    }
+
     private char randCol() {
         // TODO implement
         char col;

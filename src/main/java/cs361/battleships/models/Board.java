@@ -8,6 +8,7 @@ import java.util.List;
 public class Board {
 	@JsonProperty private List<Ship> ships;
 	@JsonProperty private List<Result> attacks;
+	@JsonProperty private List<Result> views;
 
 	/*
     DO NOT change the signature of this method. It is used by the grading scripts.
@@ -15,6 +16,7 @@ public class Board {
 	public Board() {
 		ships = new ArrayList<>();
 		attacks = new ArrayList<>();
+		views = new ArrayList<>();
 	}
 
 	/*
@@ -129,6 +131,11 @@ public class Board {
 		attacks.add(result);
 		return result;
 	}
+
+
+
+
+
 	public List<Ship> getShips() {
 		return ships;
 	}
@@ -141,9 +148,14 @@ public class Board {
 		return attacks;
 	}
 
+	public List<Result> getViews() { return views;}
+
+	public void setViews(List<Result> views) {this.views = views;}
+
 	public void setAttacks(List<Result> attacks) {
 		this.attacks = attacks;
 	}
+
 	public boolean checkShips(int x, char y, boolean vertical, String kind) {
 		for(int i = 0; i < ships.size(); i++) {
 			if (ships.get(i).isTaken(x, y)) {

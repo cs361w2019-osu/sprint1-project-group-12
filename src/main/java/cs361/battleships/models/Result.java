@@ -7,6 +7,7 @@ public class Result {
 	@JsonProperty private AtackStatus result;
 	@JsonProperty private Ship ship;
 	@JsonProperty private Square square;
+	@JsonProperty private ViewSonar view;
 
 	public AtackStatus getResult() {
 		return result;
@@ -33,4 +34,8 @@ public class Result {
 	}
 
 	public Result(){}
+
+	public ViewSonar getViewSonar() {return view;}
+
+	public void setViewSonar(){ this.view = view;}
 }
