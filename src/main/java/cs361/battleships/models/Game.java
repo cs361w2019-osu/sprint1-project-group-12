@@ -50,6 +50,13 @@ public class Game {
 
         return true;
     }
+    public Board getPlayersBoard() {
+        return playersBoard;
+    }
+
+    public Board getOpponentsBoard() {
+        return opponentsBoard;
+    }
 
     private char randCol() {
         // TODO implement
