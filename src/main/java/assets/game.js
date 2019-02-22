@@ -1,4 +1,5 @@
 var isSetup = true;
+var isView = false;
 var placedShips = 0;
 var game;
 var shipType;
@@ -106,7 +107,7 @@ function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
     if (isSetup) {
-                message="You placed a ship"
+        message="You placed a ship"
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
@@ -139,7 +140,12 @@ function cellClick() {
                 registerCellListener((e) => {});
             }
         });
-    } else {
+    }else if (isView){
+        sendXhr("POST", "/view", {game: game, x: row, y: col}, function(data) {
+        game = data;
+        redrawGrid();
+        })
+    }else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
             redrawGrid();
@@ -289,6 +295,7 @@ function updatelog(player,result,surrenderText){
     }
 }
 
+// in player board
 function change_player(result,surrenderText){
     if (result == 1){
         enemy_miss += 1;
@@ -317,6 +324,7 @@ function change_player(result,surrenderText){
     }
 }
 
+// in enemy board
 function change_enemy(result,surrenderText){
     if (result == 1){
         player_miss += 1;
@@ -342,8 +350,12 @@ function change_enemy(result,surrenderText){
 }
 
 function place_sonar(){
-    document.getElementById("place_player_sonar").addEventListener("click", check_square);
-    check_sonar += 1;
+    if (player_sunk == 1){
+        isView = true;
+        document.getElementById("place_player_sonar").addEventListener("click", check_square);
+        check_sonar += 1;
+    }
+
     if (check_sonar == 2){
         document.getElementById().removeEventListener("click");
     }
@@ -353,18 +365,41 @@ function place_sonar(){
 function check_square(){
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
+
     let table = document.getElementById("opponent");
     let j=0;
-    let x = row-3;
+
     var req = new XMLHttpRequest();
     cell = table.rows[row].cells[col];
 
+    let x = row-2;
     for (let i=0; i< 5; i++){
         sendXhr("POST", "/view", {game: game, row: x+i, col: y}, function(data) {
-             game = data;
-             redrawGrid();
+            game = data;
+            redrawGrid();
+        })
+
+    }
+    x = row-1;
+    for (let i=0; i< 3; i++){
+        sendXhr("POST", "/view", {game: game, row: x+i, col: y+1}, function(data) {
+            game = data;
+            redrawGrid();
+        })
+        sendXhr("POST", "/view", {game: game, row: x+i, col: y-1}, function(data) {
+            game = data;
+            redrawGrid();
         })
     }
+    x = row;
+    sendXhr("POST", "/view", {game: game, row: x, col: y+2}, function(data) {
+        game = data;
+        redrawGrid();
+    })
+    sendXhr("POST", "/view", {game: game, row: x+i, col: y-2}, function(data) {
+        game = data;
+        redrawGrid();
+    })
 
 }
 

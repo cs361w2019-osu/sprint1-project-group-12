@@ -132,7 +132,39 @@ public class Board {
 		return result;
 	}
 
+	public Result view(int x, char y){
+		Result view = new Result();
+		if(x < 1 || x > 10 || y < 'A' || y > 'J') {
+			view.setViewSonar(ViewSonar.INVALIDED);
+			return view;
+		}
 
+		for(int i = 0; i < views.size(); i++) {
+			if(views.get(i).getLocation().getRow() == x && views.get(i).getLocation().getColumn() == y){
+				view.setViewSonar(ViewSonar.INVALIDED);
+				return view;
+			}
+		}
+		view.setLocation(new Square(x , y));
+		for(int i = 0; i < ships.size(); i++) { ;
+			for(int j = 0; j < ships.get(i).getOccupiedSquares().size(); j++) {
+				char tempy = ships.get(i).getOccupiedSquares().get(j).getColumn();
+				int tempx = ships.get(i).getOccupiedSquares().get(j).getRow();
+				if(tempy == y && tempx == x) {
+					view.setShip(ships.get(i));
+					view.setViewSonar(ViewSonar.FOUND);
+					ships.get(i).getOccupiedSquares().remove(j);
+
+					views.add(view);
+					return view;
+				}
+			}
+		}
+		view.setViewSonar(ViewSonar.BLANK);
+		views.add(view);
+		return view;
+
+	}
 
 
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import static cs361.battleships.models.AtackStatus.*;
+import static cs361.battleships.models.ViewSonar.*;
 
 public class Game {
 
@@ -53,7 +54,7 @@ public class Game {
 
     public boolean view(int x, char y) {
         Result placesonar = opponentsBoard.view(x, y);
-        if (placesonar.getViewSonar() == INVALID) {
+        if (placesonar.getViewSonar() == INVALIDED) {
             return false;
         }
 

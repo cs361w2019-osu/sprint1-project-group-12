@@ -5,5 +5,5 @@ public enum ViewSonar {
 
     FOUND,
 
-    INVALID,
+    INVALIDED,
 }

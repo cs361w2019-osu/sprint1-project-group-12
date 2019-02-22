@@ -37,5 +37,5 @@ public class Result {
 
 	public ViewSonar getViewSonar() {return view;}
 
-	public void setViewSonar(){ this.view = view;}
+	public void setViewSonar(ViewSonar view){ this.view = view;}
 }
