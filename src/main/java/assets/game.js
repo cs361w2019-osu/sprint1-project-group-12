@@ -114,7 +114,7 @@ function redrawGrid() {
   //TEST99!!!/
   //THIS PRINTS OPPONENTS MAP
   ////////
-
+/*
   game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
 
     if(square.row  == ship.capq.row && square.column == ship.capq.column){
@@ -125,7 +125,7 @@ function redrawGrid() {
     }
 
 
-  }));
+  }));*/
 
   markHits(game.opponentsBoard, "opponent", "You won the game");
   fastmessage(message); //print result of hit message
