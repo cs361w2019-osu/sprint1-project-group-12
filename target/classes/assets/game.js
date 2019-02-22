@@ -29,7 +29,6 @@ function markHits(board, elementId, surrenderText) {
 
     var result = 0;
     var loop = 0;
-//alert(loop)
 
     board.attacks.forEach((attack) => {
     loop +=1
@@ -45,28 +44,48 @@ function markHits(board, elementId, surrenderText) {
             result = 2;
 
         }else if (attack.result === "SUNK"){
-            className = "sink"
+            className = "sink";
             message="You have SUNK an opponents ship!!"
                 result = 3;
 
         }else if (attack.result === "SURRENDER"){
             result = 4;
-            //alert(surrenderText);
+
+        }else if (attack.result === "CQHIT"){
+          message="You hit Captains Quarters!!"
+          className = "cqhit";
+            result = 2;
 
         }
-
         if (elementId == "player"){
             player = 1;
         }else if (elementId == "opponent"){
             player = 2;
+
         }
 
+        if (!document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.contains('sink')){
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+      }
     });
+
 
     updatelog(player, result,surrenderText);
 
+    //Mark SUNK ships from the boards sunk array
+
+    board.hits.forEach((square) => {
+
+          document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sink");
+
+    });
+
+
 }
+
+
+
+
 
 function redrawGrid() {
     Array.from(document.getElementById("opponent").childNodes).forEach((row) => row.remove());
@@ -77,12 +96,39 @@ function redrawGrid() {
         return;
     }
 
+    var sqnum = 0;
+
+
     game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
-        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+
+      if(square.row  == ship.capq.row && square.column == ship.capq.column){
+        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
+      }
+      else{
+    document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+      }
+
     }));
+
+
+//TEST99!!!/
+//THIS PRINTS OPPONENTS MAP
+////////
+
+game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+
+    if(square.row  == ship.capq.row && square.column == ship.capq.column){
+      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
+    }
+    else{
+  document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+    }
+
+
+}));
+
     markHits(game.opponentsBoard, "opponent", "You won the game");
-  //  alert("marking your board yo!!")
-          fastmessage(message);
+          fastmessage(message); //print result of hit message
     markHits(game.playersBoard, "player", "You lost the game");
 }
 
@@ -150,7 +196,6 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            //NEW "ALERT!!"T!
                   if (req.status != 200) {
                         if(isSetup){
                         message="Please choose a valid location!"
@@ -166,7 +211,6 @@ function sendXhr(method, url, data, handler) {
                                 message="Please choose a new square"
                         errormessage(message);
 
-           // alert("Cannot complete the action");
             return;
         }
         }
@@ -207,18 +251,15 @@ function place(size) {
 
 function fastmessage(message){
 
- //document.getElementById("myPopup").style.display="inline";
  document.getElementById("myPopup").innerHTML=message;
  document.getElementById("myPopup").style.opacity=1
  opacity=1
  window.setTimeout("hidemessage()", 200);
-//alert("sending fast!!")
 
  }
 
  function errormessage(message){
 
- //document.getElementById("myPopup").style.display="inline";
  document.getElementById("myPopup").innerHTML=message;
  document.getElementById("myPopup").style.backgroundColor="red";
  document.getElementById("myPopup").style.opacity=1
@@ -229,11 +270,9 @@ function fastmessage(message){
 function hidemessage(){
    opacity -= 0.1
  document.getElementById('myPopup').style.opacity=opacity;
-//alert(opacity)
     if (opacity < 0)
         {
         opacity = 1;
-        // document.getElementById('myPopup').style.opacity=opacity;
           document.getElementById("myPopup").style.backgroundColor="grey";
          return;}
 
@@ -300,11 +339,15 @@ function change_player(result,surrenderText){
         enemy_hit += 1;
         document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
         document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
-    }else if (result == 4){
-        enemy_sunk += 1;
-        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + player_sunk;
-        alert(surrenderText)
     }
+    //Catch for end-game
+    if(enemy_sunk > 2)
+    {   setTimeout(function()
+      { alert(surrenderText);
+        location.reload(true);
+      },500);
+    }
+
 }
 
 function change_enemy(result,surrenderText){
@@ -319,11 +362,14 @@ function change_enemy(result,surrenderText){
         player_hit += 1;
         document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
         document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
-    }else if (result == 4){
-        player_sunk += 1;
-        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        alert(surrenderText)
     }
+
+    //Catch for end-game
+    if(player_sunk > 2){
+      setTimeout(function()
+    { alert(surrenderText);
+      location.reload(true);
+      },500);
+    }
+
 }
-
-

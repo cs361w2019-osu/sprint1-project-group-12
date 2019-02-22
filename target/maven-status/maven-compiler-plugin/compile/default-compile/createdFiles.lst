@@ -8,5 +8,4 @@ cs361\battleships\models\AtackStatus.class
 controllers\ApplicationController.class
 cs361\battleships\models\Square.class
 conf\Module.class
-conf\Routes.class
 cs361\battleships\models\Game.class
