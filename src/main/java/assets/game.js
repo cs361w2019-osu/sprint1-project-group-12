@@ -82,6 +82,14 @@ function redrawGrid() {
     game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
         document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }));
+
+    //PRINT OPPONENTS BOARD
+       game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+            document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+        }));
+
+
+
     markHits(game.opponentsBoard, "opponent", "You won the game");
   //  alert("marking your board yo!!")
           fastmessage(message);
@@ -147,6 +155,7 @@ function cellClick() {
         })
     }else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+            alert("isview:" + isView)
             game = data;
             redrawGrid();
         })
@@ -348,16 +357,20 @@ function change_enemy(result,surrenderText){
         },2000);
     }
 }
+        document.getElementById("place_player_sonar").addEventListener("click", place_player_sonar);
+function place_player_sonar(){
 
-function place_sonar(){
-    if (player_sunk == 1){
+    if (enemy_sunk === 1){
+        console.log("test");
         isView = true;
-        document.getElementById("place_player_sonar").addEventListener("click", check_square);
+        check_square();
         check_sonar += 1;
+    }else{
+        alert("you cannot use sonar" + player_sunk + enemy_sunk);
     }
 
-    if (check_sonar == 2){
-        document.getElementById().removeEventListener("click");
+    if (check_sonar === 2){
+        document.getElementById("place_player_sonar").removeEventListener("click");
     }
 }
 
