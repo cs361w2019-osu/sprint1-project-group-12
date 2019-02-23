@@ -14,57 +14,63 @@ var message="blank";
 var opacity=1;
 
 function makeGrid(table, isPlayer) {
-    for (i=0; i<10; i++) {
-        let row = document.createElement('tr');
-        for (j=0; j<10; j++) {
-            let column = document.createElement('td');
-            column.addEventListener("click", cellClick);
-            row.appendChild(column);
-        }
-        table.appendChild(row);
+  for (i=0; i<10; i++) {
+    let row = document.createElement('tr');
+    for (j=0; j<10; j++) {
+      let column = document.createElement('td');
+      column.addEventListener("click", cellClick);
+      row.appendChild(column);
     }
+    table.appendChild(row);
+  }
 }
 
 function markHits(board, elementId, surrenderText) {
 
-    var result = 0;
-    var loop = 0;
-//alert(loop)
+  var result = 0;
+  var loop = 0;
 
-    board.attacks.forEach((attack) => {
+  board.attacks.forEach((attack) => {
     loop +=1
-        let className;
-        if (attack.result === "MISS"){
-            className = "miss";
-            message="You missed"
-            result = 1;
+    let className;
+    if (attack.result === "MISS"){
+      className = "miss";
+      message="You missed"
+      result = 1;
 
-        }else if (attack.result === "HIT"){
-            className = "hit";
-            message="You hit the opponents ship!"
-            result = 2;
+    }else if (attack.result === "HIT"){
+      className = "hit";
+      message="You hit the opponents ship!"
+      result = 2;
 
-        }else if (attack.result === "SUNK"){
-            className = "sink"
-            message="You have SUNK an opponents ship!!"
-                result = 3;
+    }else if (attack.result === "SUNK"){
+      className = "sink";
+      message="You have SUNK an opponents ship!!"
+      result = 3;
 
-        }else if (attack.result === "SURRENDER"){
-            result = 4;
-            //alert(surrenderText);
+    }else if (attack.result === "SURRENDER"){
+      result = 4;
 
-        }
+    }else if (attack.result === "CQHIT"){
+      message="You hit Captains Quarters!!"
+      className = "cqhit";
+      result = 2;
 
-        if (elementId == "player"){
-            player = 1;
-        }else if (elementId == "opponent"){
-            player = 2;
-        }
+    }
+    if (elementId == "player"){
+      player = 1;
+    }else if (elementId == "opponent"){
+      player = 2;
 
-        document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
-    });
+    }
 
-    updatelog(player, result,surrenderText);
+    if (!document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.contains('sink')){
+      document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+    }
+  });
+
+
+  updatelog(player, result,surrenderText);
 
   //Mark SUNK ships from the boards sunk array
 
@@ -77,37 +83,68 @@ function markHits(board, elementId, surrenderText) {
 
 }
 
+
+
+
+
 function redrawGrid() {
-    Array.from(document.getElementById("opponent").childNodes).forEach((row) => row.remove());
-    Array.from(document.getElementById("player").childNodes).forEach((row) => row.remove());
-    makeGrid(document.getElementById("opponent"), false);
-    makeGrid(document.getElementById("player"), true);
-    if (game === undefined) {
-        return;
+  Array.from(document.getElementById("opponent").childNodes).forEach((row) => row.remove());
+  Array.from(document.getElementById("player").childNodes).forEach((row) => row.remove());
+  makeGrid(document.getElementById("opponent"), false);
+  makeGrid(document.getElementById("player"), true);
+  if (game === undefined) {
+    return;
+  }
+
+  var sqnum = 0;
+
+
+  game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+
+    if(square.row  == ship.capq.row && square.column == ship.capq.column){
+      document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
+    }
+    else{
+      document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }
 
-    game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
-        document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
-    }));
-    markHits(game.opponentsBoard, "opponent", "You won the game");
-  //  alert("marking your board yo!!")
-          fastmessage(message);
-    markHits(game.playersBoard, "player", "You lost the game");
+  }));
+
+
+  //TEST99!!!/
+  //THIS PRINTS OPPONENTS MAP
+  ////////
+/*
+  game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+
+    if(square.row  == ship.capq.row && square.column == ship.capq.column){
+      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
+    }
+    else{
+      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+    }
+
+
+  }));*/
+
+  markHits(game.opponentsBoard, "opponent", "You won the game");
+  fastmessage(message); //print result of hit message
+  markHits(game.playersBoard, "player", "You lost the game");
 }
 
 var oldListener;
 function registerCellListener(f) {
-    let el = document.getElementById("player");
-    for (i=0; i<10; i++) {
-        for (j=0; j<10; j++) {
-            let cell = el.rows[i].cells[j];
-            cell.removeEventListener("mouseover", oldListener);
-            cell.removeEventListener("mouseout", oldListener);
-            cell.addEventListener("mouseover", f);
-            cell.addEventListener("mouseout", f);
-        }
+  let el = document.getElementById("player");
+  for (i=0; i<10; i++) {
+    for (j=0; j<10; j++) {
+      let cell = el.rows[i].cells[j];
+      cell.removeEventListener("mouseover", oldListener);
+      cell.removeEventListener("mouseout", oldListener);
+      cell.addEventListener("mouseover", f);
+      cell.addEventListener("mouseout", f);
     }
-    oldListener = f;
+  }
+  oldListener = f;
 }
 
 function cellClick() {

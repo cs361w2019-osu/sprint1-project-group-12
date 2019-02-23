@@ -16,9 +16,8 @@ public class Ship {
 	@JsonProperty protected String kind = "";
 	@JsonProperty protected List<Square> occupiedSquares;
 	@JsonProperty protected List<Square> hitSquares;
-    private String kind = "";
-private int cq = 0;
-private Square capq;
+    private int cq = 0;
+    private Square capq;
 
 	public Ship() {
 		occupiedSquares = new ArrayList<Square>();
@@ -50,10 +49,6 @@ private Square capq;
 		hitSquares = new ArrayList<>();
 
 
-	}
-	public boolean checkShip(int x, char y, boolean vertical, String kindV) {
-		System.out.println("\nShip's thing");
-		return true;
 	}
 	public List<Square> getOccupiedSquares() {
 
@@ -89,7 +84,6 @@ public void hitCq(){
 	public boolean isTaken( int x, char y) {
 	//	int size = occupiedSquares.size();
 	//	randr = randr.nextInt(occupiedSquares.size());
-
 
 		for(int i = 0; i < occupiedSquares.size(); i++) {
 			if(x == occupiedSquares.get(i).getRow() && y == occupiedSquares.get(i).getColumn()) {

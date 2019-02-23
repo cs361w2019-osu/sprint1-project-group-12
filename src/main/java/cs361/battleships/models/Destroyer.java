@@ -9,27 +9,11 @@ public class Destroyer extends Ship {
     public Destroyer()
     {}
     public Destroyer(String kind) {
+        super(kind);
         this.kind  = kind;
+
     }
 
-    public boolean checkShip(int x, char y, boolean vertical, String kindV) {
-        System.out.println("\n" + kind + " " + kindV);
-        if(kindV.equals(kind)) {
-            return true;
-        }
-        if (vertical) {
-            if (isTaken(x + 1, y) || isTaken(x + 2, y)) {
-                System.out.println("BAD1");
-                return true;
-            }
-        } else {
-            if (isTaken(x, (char) (y + 1)) || isTaken(x, (char) (y + 2))) {
-                System.out.println("BAD2");
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public boolean makeOccupiedSquares(int x, char y, boolean isVertical) {

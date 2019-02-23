@@ -8,24 +8,8 @@ import java.util.List;
 public class Battleship extends Ship {
     public Battleship() {}
     public Battleship(String kind) {
+        super(kind);
         this.kind  = kind;
-    }
-
-    @Override
-    public boolean checkShip(int x, char y, boolean vertical, String kindV) {
-        if(kindV.equals(kind)) {
-            return true;
-        }
-        if (vertical) {
-            if (isTaken(x + 1, y) || isTaken(x + 2, y) || isTaken(x + 3, y)) {
-                return true;
-            }
-        } else {
-            if (isTaken(x, (char) (y + 1)) || isTaken(x, (char) (y + 2)) || isTaken(x, (char) (y + 3))) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
