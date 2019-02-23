@@ -333,20 +333,6 @@ function hidemessage(){
       enemy_hit += 1;
       document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
     }else if (result == 3){
-        enemy_sunk += 1;
-        enemy_hit += 1;
-        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
-        document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
-    }else if (result == 4){
-        enemy_sunk += 1;
-        document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-             location.reload(true);
-        },2000);
-
       enemy_sunk += 1;
       enemy_hit += 1;
       document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
@@ -370,19 +356,6 @@ function hidemessage(){
       player_hit += 1;
       document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
     }else if (result == 3){
-        player_sunk += 1;
-        player_hit += 1;
-        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
-    }else if (result == 4){
-        player_sunk += 1;
-        document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
-        setTimeout(function(){
-            alert(surrenderText);
-        },1000);
-        setTimeout(function(){
-            location.reload(true);
-        },2000);
       player_sunk += 1;
       player_hit += 1;
       document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
