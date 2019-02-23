@@ -2,10 +2,14 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    margin-right: 2%;
-    margin-left: 2%;
+    margin-right: 25px;
+    margin-left: 25px;
     border: 1px solid black;
     border-spacing: 0px;
+}
+
+#opponent {
+    margin-right: 0px;
 }
 
 .battleGrid tr {
@@ -30,7 +34,17 @@ td:hover {
     background-color: black;
 }
 
+.capq {
+    background-color: green;
+}
+
 .hit {
+    background-color: #f1fc35;
+}
+
+
+
+.cqhit {
     background-color: orange;
 }
 
@@ -39,7 +53,7 @@ td:hover {
 }
 
 .miss {
-    background-color: blue;
+ background: rgba(50, 100, 200, 0.3);
 }
 
 .place-text {
@@ -93,18 +107,25 @@ td:hover {
 
 .g_l{
     position: fixed;
+    margin-left: 5px;
+    margin-top: 8.5px;
+}
+
+.other {
+    margin-left: 5px;
+    margin-top: 8.5px;
 }
 
 .grid-label{
-    margin-top: 10px;
-    margin-bottom: 12 px;
+    margin-bottom: 11.8px;
 }
 .top{
     position: fixed;
 }
 .top-label{
-    text-indent : 25px;
-    letter-spacing:9px
+    font-size: 16px;
+    text-indent : 24.5px;
+    letter-spacing: 10.15px;
 }
 
 div {
