@@ -2,10 +2,11 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    margin-right: 25px;
+    margin-right: 40px;
     margin-left: 25px;
-    border: 1px solid black;
+    border: 3px solid black;
     border-spacing: 0px;
+    left:40px;
 }
 
 #opponent {
@@ -13,7 +14,7 @@
 }
 
 .battleGrid tr {
-    border: 1px solid black;
+    border: 3px solid black;
     height: 30px;
 }
 
@@ -52,6 +53,7 @@ td:hover {
     margin-right: 25%;
     margin-bottom: 0;
     margin-top: 5%;
+    font-weight: bold;
     font-weight: bold;
     text-align: center;
 }
@@ -99,15 +101,18 @@ td:hover {
     position: fixed;
     margin-left: 5px;
     margin-top: 8.5px;
+    font-weight: bold;
 }
 
 .other {
     margin-left: 5px;
     margin-top: 8.5px;
+    font-weight: bold;
 }
 
 .grid-label{
     margin-bottom: 11.8px;
+    font-weight: bold;
 }
 .top{
     position: fixed;
@@ -116,6 +121,8 @@ td:hover {
     font-size: 16px;
     text-indent : 24.5px;
     letter-spacing: 10.15px;
+    margin-top: 8.5px;
+    font-weight: bold;
 }
 
 div {
@@ -123,19 +130,28 @@ div {
 }
 
 body {
+    background-image: url("ship.jpg");
+    opacity: .7;
+    filter:alpha(opacity=50);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+
     margin: 0;
 }
 
 #head {
-    background-color: black;
+
     align-items: center;
     display: flex;
     position: relative;
-    color: white;
-    font-size: 80px;
+    text-align:center;
+    font-size: 100px;
     font-weight: 100;
     margin: 0 0 20px 0;
     padding-top: 30px;
+
 
 }
 .footer{
@@ -274,4 +290,13 @@ margin-left:10px;
 z-index: 10;
 bottom: 5%;
 left: 10%;
+font-weight: bold;
+}
+.name{
+    text-align:center;
+    letter-spacing:1em;
+    margin-top: 8.5px;
+    font-weight: bold;
+    font-size:25px;
+
 }

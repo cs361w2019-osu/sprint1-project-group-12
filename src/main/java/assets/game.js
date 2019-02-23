@@ -132,6 +132,7 @@ function cellClick() {
 
                 statsDiv.style.display = "block";
                 document.getElementById("myInfo").innerHTML="Now Attacking:";
+
                 document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
 
                 isSetup = false;
