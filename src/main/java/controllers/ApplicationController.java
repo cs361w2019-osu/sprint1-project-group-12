@@ -36,6 +36,9 @@ public class ApplicationController {
         }
         System.out.println("I should place something.");
         boolean result = game.placeShip(ship, g.getActionRow(), g.getActionColumn(), g.isVertical());
+
+        System.out.printf("PLACING A SHIP!@#!@#");
+
         if (result) {
             return Results.json().render(game);
         } else {
@@ -45,9 +48,10 @@ public class ApplicationController {
 
     public Result attack(Context context, AttackGameAction g) {
         Game game = g.getGame();
-        boolean result = game.attack(g.getActionRow(), g.getActionColumn());
+//System.out.println("Inside of attack loop!@");
+       boolean result = game.attack(g.getActionRow(), g.getActionColumn());
         if (result) {
-            return Results.json().render(game);
+           return Results.json().render(game);
         } else {
             return Results.badRequest();
         }
