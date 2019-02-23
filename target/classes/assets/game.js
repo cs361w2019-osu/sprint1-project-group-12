@@ -104,9 +104,14 @@ function registerCellListener(f) {
 function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
+    console.log("Clicked on a cell.");
     if (isSetup) {
                 message="You placed a ship"
+                console.log("Posting to place");
+                console.log(game);
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
+            console.log("done POSTING");
+            console.log(data);
             game = data;
             redrawGrid();
             if(shipType === "MINESWEEPER") {
@@ -174,6 +179,7 @@ function sendXhr(method, url, data, handler) {
     });
     req.open(method, url);
     req.setRequestHeader("Content-Type", "application/json");
+    console.log(data);
     req.send(JSON.stringify(data));
 }
 
