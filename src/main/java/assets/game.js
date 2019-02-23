@@ -191,48 +191,6 @@ function cellClick() {
             redrawGrid();
         })
     }
-  let row = this.parentNode.rowIndex + 1;
-  let col = String.fromCharCode(this.cellIndex + 65);
-  if (isSetup) {
-    message="You placed a ship"
-    sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
-      game = data;
-      redrawGrid();
-      if(shipType === "MINESWEEPER") {
-        document.getElementById("place_minesweeper").removeEventListener("click", minesweeper);
-        var name = document.getElementById("place_minesweeper");
-        name.className = "grayout";
-      }
-      if(shipType === "DESTROYER") {
-        document.getElementById("place_destroyer").removeEventListener("click", destroyer);
-        var name = document.getElementById("place_destroyer");
-        name.className = "grayout";
-      }
-      if(shipType === "BATTLESHIP") {
-        document.getElementById("place_battleship").removeEventListener("click", battleship);
-        var name = document.getElementById("place_battleship");
-        name.className = "grayout";
-      }
-      placedShips++;
-      if (placedShips == 3) {
-        var shipDiv = document.getElementById("ship-holder");
-        var statsDiv = document.getElementById("stats-holder");
-        shipDiv.style.display = "none";
-
-        statsDiv.style.display = "block";
-        document.getElementById("myInfo").innerHTML="Now Attacking:";
-        document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
-
-        isSetup = false;
-        registerCellListener((e) => {});
-      }
-    });
-  } else {
-    sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
-      game = data;
-      redrawGrid();
-    })
-  }
 }
 
 function sendXhr(method, url, data, handler) {
