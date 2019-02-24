@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+
 public class BoardTest {
 
     @Test
@@ -22,19 +23,50 @@ public class BoardTest {
     public void testNonOverlappingPlacement() {
         Board board = new Board();
         board.placeShip(new Ship("MINESWEEPER"), 5, 'C', false);
-        assertTrue(board.placeShip(new Ship("DESTROYER"), 6, 'B', false));
+        assertTrue(board.placeShip(new Destroyer("DESTROYER"), 6, 'B', false));
     }
     @Test
     public void testUniqueShips() {
         Board board = new Board();
-        board.placeShip(new Ship("MINESWEEPER"), 5, 'C', false);
-        assertFalse(board.placeShip(new Ship("MINESWEEPER"), 6, 'B', false));
-        assertTrue(board.placeShip(new Ship("DESTROYER"), 7, 'B', false));
+        board.placeShip(new Minesweeper("MINESWEEPER"), 5, 'C', false);
+        assertFalse(board.placeShip(new Minesweeper("MINESWEEPER"), 6, 'B', false));
+        assertTrue(board.placeShip(new Destroyer("DESTROYER"), 7, 'B', false));
+        assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 4, 'A', false));
     }
     @Test
     public void testAttack() {
         Board board = new Board();
        assertTrue(board.attack(5, 'C').getResult() == AtackStatus.MISS);
        assertTrue(board.attack(11, 'C').getResult() == AtackStatus.INVALID);
+    }
+    @Test
+    public void testCheckShip() {
+        Board board = new Board();
+        board.placeShip(new Minesweeper("MINESWEEPER"), 5, 'C', false);
+        assertTrue(board.checkShips(3, 'B', false, "MINESWEEPER"));
+        assertFalse(board.checkShips(3, 'B', false, "DESTROYER"));
+        assertFalse(board.checkShips(3, 'B', false, "BATTLESHIP"));
+        assertTrue(board.checkShips(5, 'C', false, "MINESWEEPER"));
+        assertTrue(board.checkShips(5, 'C', false, "DESTROYER"));
+        assertTrue(board.checkShips(5, 'C', false, "BATTLESHIP"));
+        assertTrue(board.checkShips(4, 'C', true, "MINESWEEPER"));
+        assertTrue(board.checkShips(3, 'C', true, "DESTROYER"));
+        assertTrue(board.checkShips(3, 'C', true, "BATTLESHIP"));
+        assertFalse(board.checkShips(5, 'A', true, "DESTROYER"));
+        assertFalse(board.checkShips(5, 'A', true, "BATTLESHIP"));
+    }
+    @Test
+    public void testPlacementVertical() {
+        Board board = new Board();
+        assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', true));
+        assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'B', true));
+        assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'C', true));
+    }
+    @Test
+    public void PlacementTest() {
+        Board board = new Board();
+        assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', false));
+        assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'A', false));
+        assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'A', false));
     }
 }
