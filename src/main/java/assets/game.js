@@ -12,6 +12,8 @@ var enemy_sunk = 0;
 var player = 1;
 var message="blank";
 var opacity=1;
+var isView = false;
+var check_sonar = 0;
 
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
@@ -69,9 +71,9 @@ function markHits(board, elementId, surrenderText) {
     }
   });
 
-
-  updatelog(player, result,surrenderText);
-
+    if(!isView) {
+     updatelog(player, result,surrenderText);
+    }
   //Mark SUNK ships from the boards sunk array
 
   board.hits.forEach((square) => {
@@ -155,6 +157,7 @@ function cellClick() {
         sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
+
             if(shipType === "MINESWEEPER") {
                 document.getElementById("place_minesweeper").removeEventListener("click", minesweeper);
                 var name = document.getElementById("place_minesweeper");
@@ -185,6 +188,9 @@ function cellClick() {
                 registerCellListener((e) => {});
             }
         });
+
+    }else if (isView){
+                 drawSonar(row, col);
     } else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
@@ -192,7 +198,15 @@ function cellClick() {
         })
     }
 }
+document.getElementById("place_player_sonar").addEventListener("click", place_player_sonar);
 
+function place_player_sonar(){
+    if (enemy_sunk >= 1 && check_sonar < 2){
+        isView = !isView;
+    }else if (enemy_sunk < 1 || !isView || check_sonar > 2){
+        alert("You cannot use sonar at this time!");
+    }
+}
 function sendXhr(method, url, data, handler) {
   var req = new XMLHttpRequest();
   req.addEventListener("load", function(event) {
@@ -294,7 +308,6 @@ function hidemessage(){
       game = data;
     });
     if(mineFlag === true) {
-      console.log("works");
     }
   };
 
@@ -372,3 +385,63 @@ function hidemessage(){
     }
 
   }
+function drawSonar(xrow, ycol){
+  //  document.getElementById("opponent").rows[x-1].cells[y.charCodeAt(0)-'A'.charCodeAt(0)].classList.add("occupied");
+  check_sonar++;
+  var sonAr = [];
+
+  sonAr.push({x:xrow, y:ycol.charCodeAt(0)-65});
+
+   sonAr.push({x:xrow+1, y:ycol.charCodeAt(0)-65});
+   sonAr.push({x:xrow+2, y:ycol.charCodeAt(0)-65});
+   sonAr.push({x:xrow-1, y:ycol.charCodeAt(0)-65});
+   sonAr.push({x:xrow-2, y:ycol.charCodeAt(0)-65});
+
+
+   sonAr.push({x:xrow, y:ycol.charCodeAt(0)+1-65});
+   sonAr.push({x:xrow, y:ycol.charCodeAt(0)+2-65});
+   sonAr.push({x:xrow, y:ycol.charCodeAt(0)-1-65});
+   sonAr.push({x:xrow, y:ycol.charCodeAt(0)-2-65});
+
+
+   sonAr.push({x:xrow+1, y:ycol.charCodeAt(0)+1-65});
+   sonAr.push({x:xrow+1, y:ycol.charCodeAt(0)-1-65});
+   sonAr.push({x:xrow-1, y:ycol.charCodeAt(0)+1-65});
+   sonAr.push({x:xrow-1, y:ycol.charCodeAt(0)-1-65});
+
+
+    for(i=0; i<13; i++){
+    rownum = sonAr[i].x;
+    colnum = sonAr[i].y;
+        if(document.getElementById("opponent").rows[rownum-1]) {
+            if(document.getElementById("opponent").rows[rownum-1].cells[colnum]) {
+                 document.getElementById("opponent").rows[rownum-1].cells[colnum].classList.add("sonarSQ");
+            }
+        }
+    }
+
+    game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+
+    var occSq = 0;
+
+    for(i = 0; i<13; i++){
+        rownum = sonAr[i].x;
+        colnum = sonAr[i].y;
+       // colnum.fromCharCode(colnum + 65);
+       colchar = String.fromCharCode(colnum + 65);
+
+        if(square.row == rownum && square.column == colchar) {
+            document.getElementById("opponent").rows[rownum-1].cells[colnum].classList.remove("sonarSQ");
+            document.getElementById("opponent").rows[rownum-1].cells[colnum].classList.add("occupied")
+
+           //  document.getElementById("opponent").rows[rownum-1].cells[colnum].classList.add("occupied")
+        }
+    }
+        setTimeout("redrawGrid()", 2000);
+        setTimeout(function(){
+            isView = false;
+        }, 2300);
+   }));
+
+
+}

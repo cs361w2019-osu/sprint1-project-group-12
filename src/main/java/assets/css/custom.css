@@ -40,22 +40,27 @@ td:hover {
     background-color: green;
 }
 
-.hit {
-    background-color: #f1fc35;
-}
-
 
 
 .cqhit {
     background-color: orange;
 }
 
-.sink {
-    background-color: red;
-}
+
 
 .miss {
  background: rgba(50, 100, 200, 0.3);
+}
+
+.sonarSQ {
+ background-color: grey;
+}
+.hit {
+    background-color: #f1fc35;
+}
+
+.sink {
+    background-color: red;
 }
 
 .place-text {
