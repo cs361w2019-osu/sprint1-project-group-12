@@ -37,7 +37,11 @@ public class BoardTest {
     public void testAttack() {
         Board board = new Board();
        assertTrue(board.attack(5, 'C').getResult() == AtackStatus.MISS);
-       assertTrue(board.attack(11, 'C').getResult() == AtackStatus.INVALID);
+        board.placeShip(new Battleship("BATTLESHIP"), 6, 'C', true);
+        assertTrue(board.attack(6, 'C').getResult() == AtackStatus.HIT);
+        assertTrue(board.attack(7, 'C').getResult() == AtackStatus.HIT);
+        assertTrue(board.attack(7, 'C').getResult() == AtackStatus.INVALID);
+        assertTrue(board.attack(11, 'C').getResult() == AtackStatus.INVALID);
     }
     @Test
     public void testCheckShip() {
