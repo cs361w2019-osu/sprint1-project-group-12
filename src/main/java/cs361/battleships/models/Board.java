@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class Board {
 	@JsonProperty private List<Ship> ships;
 	@JsonProperty private List<Result> attacks;
@@ -123,8 +122,13 @@ public class Board {
 					 return result;
 				 }
 			 }
+
+
 			 result.setLocation(new Square(x , y));
+
 			 int resultnum = 0;
+
+
 			 for(int i = 0; i < ships.size(); i++) {
 				 for(int j = 0; j < ships.get(i).getOccupiedSquares().size(); j++) {
 					 char tempy = ships.get(i).getOccupiedSquares().get(j).getColumn();
@@ -177,7 +181,7 @@ public class Board {
 						 attacks.add(result);
 
 						 addHit(x, y, i);
-
+						 
 						 if(resultnum > 0){
 							 addSunk(x, y, i);
 							 ships.remove(i);
@@ -259,4 +263,3 @@ public class Board {
 		return false;
 	}
 }
-
