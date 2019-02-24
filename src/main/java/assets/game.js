@@ -71,9 +71,7 @@ function markHits(board, elementId, surrenderText) {
     }
   });
 
-    if(!isView) {
      updatelog(player, result,surrenderText);
-    }
   //Mark SUNK ships from the boards sunk array
 
   board.hits.forEach((square) => {
@@ -438,10 +436,7 @@ function drawSonar(xrow, ycol){
            //  document.getElementById("opponent").rows[rownum-1].cells[colnum].classList.add("occupied")
         }
     }
-        setTimeout("redrawGrid()", 2000);
-        setTimeout(function(){
             isView = false;
-        }, 2300);
    }));
 
 
