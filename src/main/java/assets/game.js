@@ -177,8 +177,9 @@ function cellClick() {
             if (placedShips == 3) {
                 var shipDiv = document.getElementById("ship-holder");
                 var statsDiv = document.getElementById("stats-holder");
+                var sonarDiv = document.getElementById("place_player_sonar");
                 shipDiv.style.display = "none";
-
+                sonarDiv.style.display = "block";
                 statsDiv.style.display = "block";
                 document.getElementById("myInfo").innerHTML="Now Attacking:";
 
