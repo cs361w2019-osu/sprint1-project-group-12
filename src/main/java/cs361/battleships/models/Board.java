@@ -34,7 +34,7 @@ public class Board {
 			return false;
 		}
         Random rand = new Random();
-        Square randomElement = ship.getOccupiedSquares().get(rand.nextInt(ship.getOccupiedSquares().size()));
+        Square randomElement = ship.getOccupiedSquares().get(ship.getOccupiedSquares().size()-2);
         //make capq square at random location.
         ship.makeCapQ(randomElement.getRow(), randomElement.getColumn());
 		ships.add(ship);
