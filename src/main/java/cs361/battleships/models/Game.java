@@ -17,20 +17,28 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-
-
+        System.out.printf("PLAYER: %d %c\n", x, y);
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
-        if (!successful)
+        if (!successful) {
             return false;
-
+        }
+        System.out.println("ENEMY");
         boolean opponentPlacedSuccessfully;
         do {
             // AI places random ships, so it might try and place overlapping ships
             // let it try until it gets it right
-            Ship ship2 = new Ship(ship.getKind());
+            Ship ship2 = null;
+            if(ship.getKind().equals("MINESWEEPER")) {
+                ship2 = new Minesweeper(ship.getKind());
+            }
+            if(ship.getKind().equals("DESTROYER")) {
+                ship2 = new Destroyer(ship.getKind());
+            }
+            if(ship.getKind().equals("BATTLESHIP")) {
+                ship2 = new Battleship(ship.getKind());
+            }
             opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
         } while (!opponentPlacedSuccessfully);
-
         return true;
     }
 
@@ -51,6 +59,13 @@ public class Game {
         } while(opponentAttackResult.getResult() == INVALID);
 
         return true;
+    }
+    public Board getPlayersBoard() {
+        return playersBoard;
+    }
+
+    public Board getOpponentsBoard() {
+        return opponentsBoard;
     }
 
     private char randCol() {

@@ -23,87 +23,23 @@ public class Board {
 			 hits = new ArrayList<>();
 		 }
 
-		 /*
-		 DO NOT change the signature of this method. It is used by the grading scripts.
-		 */
-		 public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-			 if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 3) {
-				 return false;
-			 }
-			 int loc = 0;
-
-			 if(ship.getKind().equals("MINESWEEPER")) {
-				 char b = (char)(y + 1);
-				 if(isVertical == true) {
-					 if(x + 1 > 10) {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x+1, y));
-
-				 }
-				 if(isVertical == false) {
-					 if(b > 'J') {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x, b));
-
-				 }
-			 }
-			 if(ship.getKind().equals("DESTROYER")) {
-				 char b = (char)(y + 1);
-				 char b2 = (char)(b + 1);
-
-				 if(isVertical == true) {
-					 if(x + 2 > 10) {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x+1, y));
-					 ship.getOccupiedSquares().add(new Square(x+2, y));
-				 }
-				 if(isVertical == false) {
-					 if(b2 > 'J') {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x, b));
-					 ship.getOccupiedSquares().add(new Square(x, b2));
-				 }
-			 }
-			 if(ship.getKind().equals("BATTLESHIP")) {
-				 char b = (char)(y + 1);
-				 char b2 = (char)(b + 1);
-				 char b3 = (char)(b2 + 1);
-				 if(isVertical == true) {
-					 if(x + 3 > 10) {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x+1, y));
-					 ship.getOccupiedSquares().add(new Square(x+2, y));
-					 ship.getOccupiedSquares().add(new Square(x+3, y));
-				 }
-				 if(isVertical == false) {
-					 if(b3 > 'J') {
-						 return false;
-					 }
-					 ship.getOccupiedSquares().add(new Square(x,y));
-					 ship.getOccupiedSquares().add(new Square(x, b));
-					 ship.getOccupiedSquares().add(new Square(x, b2));
-					 ship.getOccupiedSquares().add(new Square(x, b3));
-				 }
-
-			 }
-
-			 Random rand = new Random();
-			 Square randomElement = ship.getOccupiedSquares().get(rand.nextInt(ship.getOccupiedSquares().size()));
-			 					//make capq square at random location.
-			 ship.makeCapQ(randomElement.getRow(), randomElement.getColumn());
-			 ships.add(ship);
-			 return true;
-		 }
+	/*
+    DO NOT change the signature of this method. It is used by the grading scripts.
+     */
+	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
+		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 3) {
+			return false;
+		}
+		if(!ship.makeOccupiedSquares(x, y, isVertical)) {
+			return false;
+		}
+        Random rand = new Random();
+        Square randomElement = ship.getOccupiedSquares().get(ship.getOccupiedSquares().size()-2);
+        //make capq square at random location.
+        ship.makeCapQ(randomElement.getRow(), randomElement.getColumn());
+		ships.add(ship);
+		return true;
+	}
 
 
 
@@ -267,65 +203,63 @@ public class Board {
 			 return ships;
 		 }
 
-public void setShips(List<Ship> ships) {
-			 this.ships = ships;
+	public void setShips(List<Ship> ships) {
+		this.ships = ships;
+	}
+
+	public List<Result> getAttacks() {
+		return attacks;
+	}
+    public List<Square> getHits() {
+
+        return hits;
+    }
+
+	public void setAttacks(List<Result> attacks) {
+		this.attacks = attacks;
+	}
+	public boolean checkShips(int x, char y, boolean vertical, String kind) {
+		for(int i = 0; i < ships.size(); i++) {
+			if (ships.get(i).isTaken(x, y)) {
+				return true;
+			}
+			if(kind.equals(ships.get(i).getKind())) {
+				return true;
+			}
+			if (kind.equals("MINESWEEPER")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char) (y + 1))) {
+						return true;
+					}
+				}
+			}
+			if (kind.equals("DESTROYER")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char) (y + 1)) || ships.get(i).isTaken(x, (char) (y + 2))) {
+						return true;
+					}
+				}
+			}
+			if (kind.equals("BATTLESHIP")) {
+				if (vertical) {
+					if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y) || ships.get(i).isTaken(x + 3, y)) {
+						return true;
+					}
+				} else {
+					if (ships.get(i).isTaken(x, (char)(y + 1)) || ships.get(i).isTaken(x,(char)(y + 2)) || ships.get(i).isTaken(x,(char)(y + 3))) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }
-
-		 public List<Result> getAttacks() {
-			 return attacks;
-		 }
-
-public List<Square> getHits() {
-
-			 return hits;
-}
-
-public void setAttacks(List<Result> attacks) {
-			 this.attacks = attacks;
-		 }
-
-public boolean checkShips(int x, char y, boolean vertical, String kind) {
-			 for(int i = 0; i < ships.size(); i++) {
-				 if (ships.get(i).isTaken(x, y)) {
-					 return true;
-				 }
-				 if(kind.equals(ships.get(i).getKind())) {
-					 return true;
-				 }
-				 if (kind.equals("MINESWEEPER")) {
-					 if (vertical) {
-						 if (ships.get(i).isTaken(x + 1, y)) {
-							 return true;
-						 }
-					 } else {
-						 if (ships.get(i).isTaken(x, (char) (y + 1))) {
-							 return true;
-						 }
-					 }
-				 }
-				 if (kind.equals("DESTROYER")) {
-					 if (vertical) {
-						 if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y)) {
-							 return true;
-						 }
-					 } else {
-						 if (ships.get(i).isTaken(x, (char) (y + 1)) || ships.get(i).isTaken(x, (char) (y + 2))) {
-							 return true;
-						 }
-					 }
-				 }
-				 if (kind.equals("BATTLESHIP")) {
-					 if (vertical) {
-						 if (ships.get(i).isTaken(x + 1, y) || ships.get(i).isTaken(x + 2, y) || ships.get(i).isTaken(x + 3, y)) {
-							 return true;
-						 }
-					 } else {
-						 if (ships.get(i).isTaken(x, (char)(y + 1)) || ships.get(i).isTaken(x,(char)(y + 2)) || ships.get(i).isTaken(x,(char)(y + 3))) {
-							 return true;
-						 }
-					 }
-				 }
-			 }
-			 return false;
-		 }
-	 }

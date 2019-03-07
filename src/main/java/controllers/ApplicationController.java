@@ -1,11 +1,12 @@
 package controllers;
 
 import com.google.inject.Singleton;
-import cs361.battleships.models.Game;
-import cs361.battleships.models.Ship;
+import cs361.battleships.models.*;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
+
+import javax.validation.constraints.Null;
 
 @Singleton
 public class ApplicationController {
@@ -21,10 +22,18 @@ public class ApplicationController {
 
     public Result placeShip(Context context, PlacementGameAction g) {
         Game game = g.getGame();
-        Ship ship = new Ship(g.getShipType());
+        Ship ship = null;
+        if(g.getShipType().equals("MINESWEEPER")) {
+            ship = new Minesweeper(g.getShipType());
+        }
+        if(g.getShipType().equals("DESTROYER")) {
+            ship = new Destroyer(g.getShipType());
+        }
+        if(g.getShipType().equals("BATTLESHIP")) {
+            ship = new Battleship(g.getShipType());
+        }
         boolean result = game.placeShip(ship, g.getActionRow(), g.getActionColumn(), g.isVertical());
 
-        System.out.printf("PLACING A SHIP!@#!@#");
 
         if (result) {
             return Results.json().render(game);
@@ -35,7 +44,6 @@ public class ApplicationController {
 
     public Result attack(Context context, AttackGameAction g) {
         Game game = g.getGame();
-//System.out.println("Inside of attack loop!@");
        boolean result = game.attack(g.getActionRow(), g.getActionColumn());
         if (result) {
            return Results.json().render(game);
