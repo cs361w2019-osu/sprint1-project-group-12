@@ -5,39 +5,47 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Destroyer extends Ship {
-    public Destroyer()
-    {}
-    public Destroyer(String kind) {
+public class Submarine extends Ship {
+    public Submarine() {}
+    public Submarine(String kind) {
         super(kind);
         this.kind  = kind;
-
     }
-
 
     @Override
     public boolean makeOccupiedSquares(int x, char y, boolean isVertical) {
         char b = (char)(y + 1);
         char b2 = (char)(b + 1);
+        char b3 = (char)(b2 + 1);
+
+
+      char b4 = (char)(b3 + 1);
+
+
 
         if(isVertical == true) {
-            if(x + 2 > 10) {
+            if(x + 3 > 10 || b > 'J') {
                 return false;
             }
-            System.out.println("Building destroyer (vert)!!");
+            System.out.println("Building sub (vert)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x+1, y));
             occupiedSquares.add(new Square(x+2, y));
+            occupiedSquares.add(new Square(x+3, y));
+            occupiedSquares.add(new Square(x+2, b)); //NEWWW
         }
         if(isVertical == false) {
-            if(b2 > 'J') {
+            if(b3 > 'J' || x < 2) {
                 return false;
             }
-            System.out.println("Building destroyer (horiz)!!");
-
+            System.out.println("Building sub (horiz)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x, b));
+
             occupiedSquares.add(new Square(x, b2));
+            occupiedSquares.add(new Square(x, b3));
+            occupiedSquares.add(new Square(x-1, b2)); // NEWWWW
+
         }
         return true;
     }

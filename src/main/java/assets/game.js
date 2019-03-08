@@ -171,8 +171,13 @@ function cellClick() {
                 var name = document.getElementById("place_battleship");
                 name.className = "grayout";
             }
+            if(shipType === "SUBMARINE") {
+                document.getElementById("place_submarine").removeEventListener("click", submarine);
+                var name = document.getElementById("place_submarine");
+                name.className = "grayout";
+            }
             placedShips++;
-            if (placedShips == 3) {
+            if (placedShips == 4) {
                 var shipDiv = document.getElementById("ship-holder");
                 var statsDiv = document.getElementById("stats-holder");
                 var sonarDiv = document.getElementById("place_player_sonar");
@@ -303,6 +308,7 @@ function hidemessage(){
     document.getElementById("place_minesweeper").addEventListener("click", minesweeper);
     document.getElementById("place_destroyer").addEventListener("click", destroyer);
     document.getElementById("place_battleship").addEventListener("click", battleship);
+    document.getElementById("place_submarine").addEventListener("click", submarine);
     sendXhr("GET", "/game", {}, function(data) {
       game = data;
     });
@@ -326,6 +332,12 @@ function hidemessage(){
     shipType = "BATTLESHIP";
     registerCellListener(place(4));
     document.getElementById("place_minesweeper").removeEventListener("click", battleship);
+
+  }
+  function submarine() {
+    shipType = "SUBMARINE";
+    registerCellListener(place(4));
+    document.getElementById("place_minesweeper").removeEventListener("click", submarine);
 
   }
 

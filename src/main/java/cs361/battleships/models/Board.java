@@ -27,7 +27,7 @@ public class Board {
     DO NOT change the signature of this method. It is used by the grading scripts.
      */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 3) {
+		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 5) {
 			return false;
 		}
 		if(!ship.makeOccupiedSquares(x, y, isVertical)) {
@@ -37,6 +37,9 @@ public class Board {
         Square randomElement = ship.getOccupiedSquares().get(ship.getOccupiedSquares().size()-2);
         //make capq square at random location.
         ship.makeCapQ(randomElement.getRow(), randomElement.getColumn());
+
+				System.out.println("ADding ship (board.java29)\n");
+
 		ships.add(ship);
 		return true;
 	}
@@ -181,7 +184,7 @@ public class Board {
 						 attacks.add(result);
 
 						 addHit(x, y, i);
-						 
+
 						 if(resultnum > 0){
 							 addSunk(x, y, i);
 							 ships.remove(i);
