@@ -438,6 +438,4 @@ function drawSonar(xrow, ycol){
     }
             isView = false;
    }));
-
-
 }
