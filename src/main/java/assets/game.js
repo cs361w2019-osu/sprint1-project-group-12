@@ -110,17 +110,16 @@ function redrawGrid() {
   //THIS PRINTS OPPONENTS MAP
   ////////
 
-  game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+//  game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
 
-    if(square.row  == ship.capq.row && square.column == ship.capq.column){
-      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
-    }
-    else{
-      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
-    }
+//    if(square.row  == ship.capq.row && square.column == ship.capq.column){
+//    }
+//  else{
+//      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+//    }
 
 
-  }));
+//  }));
   var x = 0;
 
 

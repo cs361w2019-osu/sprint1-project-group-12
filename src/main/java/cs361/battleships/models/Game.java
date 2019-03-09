@@ -59,8 +59,9 @@ public class Game {
 
             }
 
-      //      opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, x, y, isVertical);
+         opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
+      //Opponent place same as player test
+      //    opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, x, y, isVertical);
 
         } while (!opponentPlacedSuccessfully);
 
