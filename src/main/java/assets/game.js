@@ -14,7 +14,7 @@ var message="blank";
 var opacity=1;
 var isView = false;
 var check_sonar = 0;
-var use_weapon = "black";
+var use_weapon = "Bomb";
 
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
@@ -399,11 +399,11 @@ function hidemessage(){
     }
 
     if (enemy_sunk === 0){
-          use_weapon = "bomb";
+          use_weapon = "Bomb";
           //console.log(use_weapon);
           document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
       }else if(enemy_sunk >= 1){
-          use_weapon = "laser";
+          use_weapon = "Laser";
           //console.log(use_weapon);
           document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
       }
