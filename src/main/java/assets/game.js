@@ -14,6 +14,7 @@ var message="blank";
 var opacity=1;
 var isView = false;
 var check_sonar = 0;
+var use_weapon = "black";
 
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
@@ -176,6 +177,7 @@ function cellClick() {
                 var shipDiv = document.getElementById("ship-holder");
                 var statsDiv = document.getElementById("stats-holder");
                 var sonarDiv = document.getElementById("place_player_sonar");
+
                 shipDiv.style.display = "none";
                 sonarDiv.style.display = "block";
                 statsDiv.style.display = "block";
@@ -195,9 +197,13 @@ function cellClick() {
             game = data;
             redrawGrid();
         })
+
     }
 }
+
+
 document.getElementById("place_player_sonar").addEventListener("click", place_player_sonar);
+
 
 function place_player_sonar(){
     if (enemy_sunk >= 1 && check_sonar < 2){
@@ -206,6 +212,9 @@ function place_player_sonar(){
         alert("You cannot use sonar at this time!");
     }
 }
+
+
+
 function sendXhr(method, url, data, handler) {
   var req = new XMLHttpRequest();
   req.addEventListener("load", function(event) {
@@ -233,6 +242,8 @@ function sendXhr(method, url, data, handler) {
   req.open(method, url);
   req.setRequestHeader("Content-Type", "application/json");
   req.send(JSON.stringify(data));
+
+
 }
 
 function place(size) {
@@ -350,6 +361,7 @@ function hidemessage(){
       enemy_hit += 1;
       document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
       document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
+      //console.log("enemy sunk " + enemy_sunk);
     }
     //Catch for end-game
     if(enemy_sunk > 2)
@@ -362,8 +374,10 @@ function hidemessage(){
   }
 
   function change_enemy(result,surrenderText){
+    //console.log("player");
     if (result == 1){
       player_miss += 1;
+
       document.getElementById("player_miss").innerHTML = "Miss: " + player_miss;
     }else if (result == 2){
       player_hit += 1;
@@ -371,6 +385,7 @@ function hidemessage(){
     }else if (result == 3){
       player_sunk += 1;
       player_hit += 1;
+      //console.log("player sunk" + player_sunk);
       document.getElementById("player_sunk").innerHTML = "Sunk: " + player_sunk;
       document.getElementById("player_hit").innerHTML = "Hit: " + player_hit;
     }
@@ -382,6 +397,16 @@ function hidemessage(){
         location.reload(true);
       },500);
     }
+
+    if (enemy_sunk === 0){
+          use_weapon = "bomb";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }else if(enemy_sunk >= 1){
+          use_weapon = "laser";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }
 
   }
 function drawSonar(xrow, ycol){
@@ -439,3 +464,5 @@ function drawSonar(xrow, ycol){
             isView = false;
    }));
 }
+
+
