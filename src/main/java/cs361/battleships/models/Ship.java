@@ -42,7 +42,7 @@ public class Ship {
         }
 				if(kind.equals("SUBMARINE")) {
 								listsize = 5;
-						}
+				}
 		int randomNum = ThreadLocalRandom.current().nextInt(0, listsize + 1);
 
 
@@ -88,7 +88,6 @@ public void hitCq(){
 	//	int size = occupiedSquares.size();
 	//	randr = randr.nextInt(occupiedSquares.size());
 	if(getKind().equals("SUBMARINE")) {
-
 		return false;
 	}
 		for(int i = 0; i < occupiedSquares.size(); i++) {

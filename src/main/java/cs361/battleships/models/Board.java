@@ -31,6 +31,7 @@ public class Board {
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
 		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 5) {
 			return true;
+
 		}
 		if(!ship.makeOccupiedSquares(x, y, isVertical)) {
 			return false;
@@ -43,6 +44,7 @@ public class Board {
 //if(ship.getKind() === "SUBMARINE"){
 	//			System.out.println("ADding ship (board.java29)\n");
 //}
+
 		ships.add(ship);
 		return true;
 	}
@@ -272,6 +274,7 @@ public class Board {
 
 
 
+
 		 public void setSub(int setLoc) {
 
 this.subLoc = setLoc;
@@ -280,15 +283,9 @@ this.subLoc = setLoc;
 		 public int getSub() {
 			 		return this.subLoc;
 		 }
-
 		 public void adjustSub() {
-
 Collections.swap(this.getShips(), this.getSub(), 3);
-
-
 		 }
-
-
 
 	public void setShips(List<Ship> ships) {
 		this.ships = ships;
