@@ -194,7 +194,7 @@ body {
     display: flex;
     position: relative;
     text-align:center;
-    font-size: 100px;
+    font-size: 85px;
     font-weight: 100;
     margin: 0 0 20px 0;
     padding-top: 30px;
@@ -390,9 +390,97 @@ font-weight: bold;
 
 }
 
+
 .place-laser{
     display: flex;
     position: fixed;
 }
 
+
+.button {
+  font-size: 1.5em;
+  padding: 10px;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  font-weight: bold;
+  right: 68px;
+  position: absolute;
+  top: 66px;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.qbox {
+  margin: 0px auto;
+  background: #00ffff;
+  border-radius: 5px;
+  height: 27%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.qbox h2 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align:center
+
+
+}
+.qbox h3 {
+  color: #333;
+  font-size: 15px;
+  font-family: Tahoma, Arial, sans-serif;
+    text-align:center
+}
+.qbox h4 {
+  color: #333;
+  font-size: 12px;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align:center
+}
+.qbox .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.qbox .close:hover {
+  color: #06D85F;
+}
+.qbox .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .qbox{
+    width: 70%;
+  }
+}
 
