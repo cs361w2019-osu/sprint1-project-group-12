@@ -87,6 +87,7 @@ td:hover {
     color: white;
 }
 
+
 .unplaced {
     margin-left: 10%;
     margin-right: 10%;
@@ -234,6 +235,8 @@ body {
     margin-top: 0;
     border-radius: 3px;
     display: none;
+
+
 }
 
 .switch {
@@ -278,50 +281,6 @@ body {
 #switch-holder {
     margin-top: 5%;
 }
-
-#switch-weapon {
-    margin-top: 5%;
-}
-
-.switch_new_laser{
-    margin-top: 5%;
-    appearance: none;
-    cursor: pointer;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-    height: 27px;
-    border-radius: 3em;
-    background-color: #00FFFF;
-    outline: 0;
-    position: relative;
-}
-
-.switch_new_laser::after {
-    font-size: 19px;
-    content: 'bomb';
-    width: 105px;
-    height: 27px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    border-radius: 3em;
-    position: absolute;
-    transform: scale(0.7);
-    margin-left: 0;
-    left: -13px;
-    transition: left 0.15s ease-in-out;
-}
-
-.switch_new_laser:checked::after {
-    left: 48%;
-    text-align: center;
-    content: 'laser';
-
-}
-
 
 .popup {
   position: relative;
@@ -389,10 +348,3 @@ font-weight: bold;
     font-size:25px;
 
 }
-
-.place-laser{
-    display: flex;
-    position: fixed;
-}
-
-
