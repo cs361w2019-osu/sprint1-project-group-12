@@ -13,16 +13,25 @@ public class Game {
     @JsonProperty private Board playersBoard = new Board();
     @JsonProperty private Board opponentsBoard = new Board();
 
+
+
     /*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-        System.out.printf("PLAYER: %d %c, %s, %d\n", x, y, ship.getKind(), ship.getOccupiedSquares().size());
+
+
+
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
+
+
+
         if (!successful) {
             return false;
         }
-        System.out.println("ENEMY");
+
+
+
         boolean opponentPlacedSuccessfully;
         do {
             // AI places random ships, so it might try and place overlapping ships
@@ -32,16 +41,41 @@ public class Game {
                 ship2 = new Minesweeper(ship.getKind());
             }
             if(ship.getKind().equals("DESTROYER")) {
+
                 ship2 = new Destroyer(ship.getKind());
             }
             if(ship.getKind().equals("BATTLESHIP")) {
+
                 ship2 = new Battleship(ship.getKind());
             }
             if(ship.getKind().equals("SUBMARINE")) {
+            //  System.out.println("SUB placed at:" + playersBoard.getShips().size());
                 ship2 = new Submarine(ship.getKind());
+
+                playersBoard.setSub(playersBoard.getShips().size()-1);
+                opponentsBoard.setSub(playersBoard.getShips().size()-1);
+
+
+
             }
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
+
+      //      opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
+            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, x, y, isVertical);
+
         } while (!opponentPlacedSuccessfully);
+
+
+
+        //ADJUST TO MAKE SUB ALWAYS LAST SHIP IN SHIP-list
+
+if(playersBoard.getShips().size() == 4){
+        if(playersBoard.getSub() != playersBoard.getShips().size()-1){
+        playersBoard.adjustSub();
+        opponentsBoard.adjustSub();
+      }
+}
+
+
         return true;
     }
 

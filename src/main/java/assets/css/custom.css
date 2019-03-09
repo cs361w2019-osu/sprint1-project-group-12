@@ -31,6 +31,11 @@ td:hover {
     background-color: gray;
 }
 
+
+.miss {
+ background: rgba(50, 100, 200, 0.3);
+}
+
 .occupied {
     background-color: black;
 }
@@ -53,9 +58,6 @@ td:hover {
     background-color: red;
 }
 
-.miss {
- background: rgba(50, 100, 200, 0.3);
-}
 
 .place-text {
     font-size: 20px;

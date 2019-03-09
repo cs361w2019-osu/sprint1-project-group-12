@@ -21,7 +21,6 @@ public class Battleship extends Ship {
             if(x + 3 > 10) {
                 return false;
             }
-            System.out.println("Building battle (vert)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x+1, y));
             occupiedSquares.add(new Square(x+2, y));
@@ -31,7 +30,6 @@ public class Battleship extends Ship {
             if(b3 > 'J') {
                 return false;
             }
-            System.out.println("Building battle (horiz)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x, b));
             occupiedSquares.add(new Square(x, b2));

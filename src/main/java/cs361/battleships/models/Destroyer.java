@@ -24,7 +24,6 @@ public class Destroyer extends Ship {
             if(x + 2 > 10) {
                 return false;
             }
-            System.out.println("Building destroyer (vert)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x+1, y));
             occupiedSquares.add(new Square(x+2, y));
@@ -33,8 +32,6 @@ public class Destroyer extends Ship {
             if(b2 > 'J') {
                 return false;
             }
-            System.out.println("Building destroyer (horiz)!!");
-
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x, b));
             occupiedSquares.add(new Square(x, b2));

@@ -27,7 +27,6 @@ public class Submarine extends Ship {
             if(x + 3 > 10 || b > 'J') {
                 return false;
             }
-            System.out.println("Building sub (vert)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x+1, y));
             occupiedSquares.add(new Square(x+2, y));
@@ -38,10 +37,8 @@ public class Submarine extends Ship {
             if(b3 > 'J' || x < 2) {
                 return false;
             }
-            System.out.println("Building sub (horiz)!!");
             occupiedSquares.add(new Square(x,y));
             occupiedSquares.add(new Square(x, b));
-
             occupiedSquares.add(new Square(x, b2));
             occupiedSquares.add(new Square(x, b3));
             occupiedSquares.add(new Square(x-1, b2)); // NEWWWW
