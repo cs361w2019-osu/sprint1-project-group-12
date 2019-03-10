@@ -80,6 +80,12 @@ public class Game {
 
         return true;
     }
+
+    public boolean moveShips(int moveInt) {
+        boolean flag = playersBoard.moveShips(moveInt);
+        return flag;
+    }
+
     public Board getPlayersBoard() {
         return playersBoard;
     }

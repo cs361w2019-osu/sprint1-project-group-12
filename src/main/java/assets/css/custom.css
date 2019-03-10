@@ -32,22 +32,6 @@ td:hover {
     background-color: gray;
 }
 
-.occupied {
-    background-color: black;
-}
-
-.capq {
-    background-color: green;
-}
-
-
-
-.cqhit {
-    background-color: orange;
-}
-
-
-
 .miss {
  background: rgba(50, 100, 200, 0.3);
 }
@@ -59,10 +43,20 @@ td:hover {
     background-color: #f1fc35;
 }
 
+.occupied {
+    background-color: black;
+}
+.capq {
+    background-color: green;
+}
+
 .sink {
     background-color: red;
 }
 
+.cqhit {
+    background-color: orange;
+}
 .place-text {
     font-size: 20px;
     margin-left: 25%;
@@ -73,6 +67,17 @@ td:hover {
     font-weight: bold;
     text-align: center;
 }
+
+.stats-text {
+    font-size: 14px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 0;
+    margin-top: 5%;
+    font-weight: bold;
+    text-align: center;
+}
+
 
 .catch_weapon {
     background: #ff9900;
@@ -100,21 +105,84 @@ td:hover {
 }
 
 .buttonable {
-    display:none;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 0;
-    height: 30px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     font-size: 12px;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 50%;
     border-color: black;
     cursor: pointer;
 }
 
 .buttonable:hover {
     background-color: gray;
+}
+
+.horizontal {
+    display: flex;
+}
+
+.actions {
+    margin-left: 20%;
+}
+
+.move_but {
+    font-size: 20px;
+    background-color: white;
+    border-radius: 75%;
+    border-color: black;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.move_but_grey {
+    font-size: 20px;
+    background-color: white;
+    border-radius: 75%;
+    border-color: black;
+    height: 30px;
+    width: 30px;
+    opacity: 0.2;
+}
+
+.move_but:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+#move_up {
+    margin-left: 51px;
+    margin-bottom: 10px;
+}
+
+#move_down {
+    margin-left: 51px;
+    margin-top: 10px;
+}
+
+#move_left {
+    margin-top: 10px;
+}
+
+#move_right {
+    margin-top: 10px;
+}
+
+.buttonGrey {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 50%;
+    border-color: black;
+    opacity: 0.2;
 }
 
 .unplaced:hover {
@@ -234,6 +302,7 @@ body {
     margin-top: 0;
     border-radius: 3px;
     display: none;
+    font-size: 10px;
 }
 
 .switch {
@@ -332,15 +401,15 @@ body {
 .popup .popuptext {
  position: absolute;
  opacity: 0;
-width: 160px;
-color: #fff;
-background:grey;
-text-align: center;
-padding: 10px 0;
-z-index: 1;
-bottom: 60%;
-left: 10%;
-margin-left: 10px;
+ width: 160px;
+ color: #fff;
+ background:grey;
+ text-align: center;
+ padding: 10px 0;
+ z-index: 1;
+ bottom: 60%;
+ left: 10%;
+ margin-left: 10px;
 }
 
 .info {
@@ -352,34 +421,34 @@ margin-left: 10px;
 .info .infotext {
  position: absolute;
  opacity: 1;
-width: 160px;
-color: #000;
-background: none;
-text-align: center;
-outline-style: dotted;
-  outline-color: blue;
-  outline-width:3px;
-padding: 5px 10px;
-margin-left:10px;
-z-index: 10;
-bottom: 45%;
-left: 10%;
-font-weight: bold;
+ width: 160px;
+ color: #000;
+ background: none;
+ text-align: center;
+ outline-style: dotted;
+ outline-color: blue;
+ outline-width:3px;
+ padding: 5px 10px;
+ margin-left:10px;
+ z-index: 10;
+ bottom: 45%;
+ left: 10%;
+ font-weight: bold;
 }
 
 .info .infotext2 {
  position: absolute;
  opacity: 1;
-width: 160px;
-color: #000;
-background: none;
-text-align: center;
-padding: 5px 10px;
-margin-left:10px;
-z-index: 10;
-bottom: 5%;
-left: 10%;
-font-weight: bold;
+ width: 160px;
+ color: #000;
+ background: none;
+ text-align: center;
+ padding: 5px 10px;
+ margin-left:10px;
+ z-index: 10;
+ bottom: 5%;
+ left: 10%;
+ font-weight: bold;
 }
 .name{
     text-align:center;

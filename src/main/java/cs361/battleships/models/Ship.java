@@ -53,6 +53,52 @@ public class Ship {
 
 
 	}
+
+	public void moveDown() {
+		capq.setRow(capq.getRow() + 1);
+		for(int i = 0; i < occupiedSquares.size(); i++) {
+			occupiedSquares.get(i).setRow(occupiedSquares.get(i).getRow() + 1);
+		}
+		if(occupiedSquares.size() > 0) {
+			for (int i = 0; i < hitSquares.size(); i++) {
+				hitSquares.get(i).setRow(hitSquares.get(i).getRow() + 1);
+			}
+		}
+	}
+	public void moveUp() {
+		capq.setRow(capq.getRow() - 1);
+		for(int i = 0; i < occupiedSquares.size(); i++) {
+			occupiedSquares.get(i).setRow(occupiedSquares.get(i).getRow() - 1);
+		}
+		if(occupiedSquares.size() > 0) {
+			for (int i = 0; i < hitSquares.size(); i++) {
+				hitSquares.get(i).setRow(hitSquares.get(i).getRow() - 1);
+			}
+		}
+	}
+	public void moveLeft() {
+		capq.setColumn((char)((int)capq.getColumn() - 1));
+		for(int i = 0; i < occupiedSquares.size(); i++) {
+			occupiedSquares.get(i).setColumn((char)((int)occupiedSquares.get(i).getColumn() - 1));
+		}
+		if(occupiedSquares.size() > 0) {
+			for (int i = 0; i < hitSquares.size(); i++) {
+				hitSquares.get(i).setColumn((char) ((int) hitSquares.get(i).getColumn() - 1));
+			}
+		}
+	}
+	public void moveRight() {
+		capq.setColumn((char) ((int) capq.getColumn() + 1));
+		for (int i = 0; i < occupiedSquares.size(); i++) {
+			occupiedSquares.get(i).setColumn((char) ((int) occupiedSquares.get(i).getColumn() + 1));
+		}
+		if (occupiedSquares.size() > 0) {
+			for (int i = 0; i < hitSquares.size(); i++) {
+				hitSquares.get(i).setColumn((char) ((int) hitSquares.get(i).getColumn() + 1));
+			}
+		}
+	}
+
 	public List<Square> getOccupiedSquares() {
 
 		return occupiedSquares;
