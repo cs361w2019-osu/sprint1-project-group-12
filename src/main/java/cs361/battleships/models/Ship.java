@@ -40,6 +40,9 @@ public class Ship {
 		if(kind.equals("BATTLESHIP")) {
             listsize = 4;
         }
+				if(kind.equals("SUBMARINE")) {
+								listsize = 5;
+				}
 		int randomNum = ThreadLocalRandom.current().nextInt(0, listsize + 1);
 
 
@@ -84,7 +87,9 @@ public void hitCq(){
 	public boolean isTaken( int x, char y) {
 	//	int size = occupiedSquares.size();
 	//	randr = randr.nextInt(occupiedSquares.size());
-
+	if(getKind().equals("SUBMARINE")) {
+		return false;
+	}
 		for(int i = 0; i < occupiedSquares.size(); i++) {
 			if(x == occupiedSquares.get(i).getRow() && y == occupiedSquares.get(i).getColumn()) {
 				return true;

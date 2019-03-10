@@ -1,5 +1,5 @@
 /<#import "../layout/defaultLayout.ftl.html" as layout>
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Home page">
 
 
 <!--<h1 id="head">&nbsp;&nbsp;The Battleship Game</h1>-->
@@ -35,6 +35,8 @@
         <div><button id="place_destroyer" class="unplaced">⬛⬛⬛</button></div>
         <div id="battleship" class="place-text">Battleship</div>
         <div><button id="place_battleship" class="unplaced">⬛⬛⬛⬛</button></div>
+        <div id="submarine" class="place-text">Submarine</div>
+        <div><button id="place_submarine" class="unplaced">⬛⬛⬛⬛⬛</button></div>
         <div id="switch-holder">
             <input type="checkbox" class="switch" id="is_vertical"></input>
         </div>
@@ -50,8 +52,6 @@
         <div id="player_hit" class="stats">Hits: 0</div>
         <div id="player_miss" class="stats">Misses: 0</div>
         <div id="player_sunk" class="stats">Sunk: 0</div>
-        <div id="update_weapon" class="catch_weapon" >Weapon: bomb</div>
-
     </div>
 
     <table id="opponent" class="battleGrid">
@@ -81,8 +81,8 @@
     <div class="sonar">
         <div><button id="place_player_sonar" class="buttonable">Sonar Pulse</button></div>
     </div>
-</div>
 
+</div>
 <script type="text/javascript" src="/assets/game.js"></script>
 <script>
     initGame();

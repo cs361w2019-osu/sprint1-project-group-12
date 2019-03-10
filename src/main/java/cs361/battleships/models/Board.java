@@ -5,13 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Collections;
+
 
 
 public class Board {
 	@JsonProperty private List<Ship> ships;
 	@JsonProperty private List<Result> attacks;
 	@JsonProperty private List<Square> hits;
-
+	@JsonProperty private int subLoc = 0;
 
 
 	/*
@@ -27,8 +29,9 @@ public class Board {
     DO NOT change the signature of this method. It is used by the grading scripts.
      */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 3) {
-			return false;
+		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 5) {
+			return true;
+
 		}
 		if(!ship.makeOccupiedSquares(x, y, isVertical)) {
 			return false;
@@ -37,6 +40,11 @@ public class Board {
         Square randomElement = ship.getOccupiedSquares().get(ship.getOccupiedSquares().size()-2);
         //make capq square at random location.
         ship.makeCapQ(randomElement.getRow(), randomElement.getColumn());
+
+//if(ship.getKind() === "SUBMARINE"){
+	//			System.out.println("ADding ship (board.java29)\n");
+//}
+
 		ships.add(ship);
 		return true;
 	}
@@ -106,11 +114,15 @@ public class Board {
 				 return result;
 			 }
 
+
 			 for(int k = 0; k < this.getHits().size(); k++) {
 
 				 char hity = this.getHits().get(k).getColumn();
 				 int hitx = this.getHits().get(k).getRow();
 				 if(hity == y && hitx == x){
+					 if(this.getShips().size() < 4){
+						 	break;
+					 }
 					 result.setResult(AtackStatus.INVALID);
 					 return result;
 				 }
@@ -118,6 +130,10 @@ public class Board {
 
 			 for(int i = 0; i < attacks.size(); i++) {
 				 if(attacks.get(i).getLocation().getRow() == x && attacks.get(i).getLocation().getColumn() == y &&  "CQHIT" != (attacks.get(i).getResult().toString())){
+
+					 if(this.getShips().size() < 4){
+							break;
+					 }
 					 result.setResult(AtackStatus.INVALID);
 					 return result;
 				 }
@@ -136,7 +152,58 @@ public class Board {
 
 									//if you hit a ship square.
 					 if(tempy == y && tempx == x) {
-						 				//if that sq matches ships cq sqyare
+
+
+
+						 				//if sub hit before one sunk
+							if(ships.size() == 4 && ships.get(i).getKind().equals("SUBMARINE")){
+								result.setResult(AtackStatus.MISS);
+								attacks.add(result);
+								return result;
+
+							}
+
+								///LASER ATTACK!@#$!@
+																						//sub is at ships[ships.size()-1
+
+							if(ships.size() < 4 && (i < ships.size()-1) ){
+
+
+
+																	//check sub squares.
+										for(int k = 0; k < ships.get(ships.size()-1).getOccupiedSquares().size(); k++){
+
+											char suby = ships.get(ships.size()-1).getOccupiedSquares().get(k).getColumn();
+											int subx = ships.get(ships.size()-1).getOccupiedSquares().get(k).getRow();
+
+
+												//SUB HIT underneath another ship
+												if(suby == y && subx == x){
+														//CQ HIT!!
+														if(ships.get(ships.size()-1).getCapq().getRow() == subx && ships.get(ships.size()-1).getCapq().getColumn()== suby){
+																ships.get(ships.size()-1).hitCq();
+																ships.get(ships.size()-1).hitCq();
+																result.setResult(AtackStatus.CQHIT);
+																attacks.add(result);
+															}
+														else{
+													ships.get(ships.size()-1).getOccupiedSquares().remove(k);
+													result.setResult(AtackStatus.HIT);
+													attacks.add(result);
+												}
+												}
+
+
+										}
+
+
+
+							}
+
+
+
+							///add this to laser
+
 						 if(ships.get(i).getCapq().getRow() == x && ships.get(i).getCapq().getColumn()== y){
 							 ships.get(i).hitCq();
 							 ships.get(i).hitCq();
@@ -150,7 +217,7 @@ public class Board {
 									 return result;
 								 }
 							 }
-						 }
+						 	}
 
 						 else	{
 							 ships.get(i).getOccupiedSquares().remove(j);
@@ -181,7 +248,7 @@ public class Board {
 						 attacks.add(result);
 
 						 addHit(x, y, i);
-						 
+
 						 if(resultnum > 0){
 							 addSunk(x, y, i);
 							 ships.remove(i);
@@ -201,6 +268,23 @@ public class Board {
 
 		 public List<Ship> getShips() {
 			 return ships;
+		 }
+
+
+
+
+
+
+		 public void setSub(int setLoc) {
+
+this.subLoc = setLoc;
+		 }
+
+		 public int getSub() {
+			 		return this.subLoc;
+		 }
+		 public void adjustSub() {
+Collections.swap(this.getShips(), this.getSub(), 3);
 		 }
 
 	public void setShips(List<Ship> ships) {
