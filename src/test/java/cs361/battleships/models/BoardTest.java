@@ -59,6 +59,20 @@ public class BoardTest {
         assertFalse(board.checkShips(5, 'A', true, "DESTROYER"));
         assertFalse(board.checkShips(5, 'A', true, "BATTLESHIP"));
     }
+
+
+    @Test
+public void MoveTest() {
+    Board board = new Board();
+    assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', false));
+    assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'A', false));
+    assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'A', false));
+    assertTrue(board.moveShips(3));
+    assertTrue(board.moveShips(1));
+    assertTrue(board.moveShips(1));
+    assertTrue(board.moveShips(2));
+    assertTrue(board.moveShips(4));
+}
     @Test
     public void testPlacementVertical() {
         Board board = new Board();
