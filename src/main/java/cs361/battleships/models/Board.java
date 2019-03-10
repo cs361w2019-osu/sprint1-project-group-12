@@ -29,10 +29,10 @@ public class Board {
     DO NOT change the signature of this method. It is used by the grading scripts.
      */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 5) {
-			return true;
+	//	if(checkShips(x, y, isVertical, ship.getKind()) || ships.size() >= 5) {
+	//		return true;
 
-		}
+		//}
 		if(!ship.makeOccupiedSquares(x, y, isVertical)) {
 			return false;
 		}
@@ -59,6 +59,10 @@ public class Board {
 				if (moveInt != 0) {
 					if (checkLocation(ships.get(i).getOccupiedSquares().get(j), ships.get(i).getKind(), moveInt)) {
 						flag = false;
+					}
+
+					if(ships.get(i).getKind().equals("SUBMARINE")){
+						flag = true;
 					}
 				}
 				if(ships.get(i).getOccupiedSquares().get(j).outOfBounds(moveInt)) {
@@ -126,8 +130,17 @@ public class Board {
 			case 4: y = 0; x = 1;
 				break;
 		}
+
+
+
+
 		for(int i = 0; i < ships.size(); i++) {
-			if(ships.get(i).getKind() != type && ships.get(i).getKind() != "SUBMARINE") {
+			if(ships.get(i).getKind() != type && ships.get(i).getKind() != "SUBMARINE" && type != "SUBMARINE") {
+
+				if(ships.get(i).getKind().equals("SUBMARINE")){
+					return false;
+				}
+
 				for (int j = 0; j < ships.get(i).getOccupiedSquares().size(); j++) {
 					if (ships.get(i).getOccupiedSquares().get(j).getColumn() == ((char)((int)square.getColumn() + y))
 						&& ships.get(i).getOccupiedSquares().get(j).getRow() == (square.getRow() + x)) {
@@ -397,12 +410,15 @@ Collections.swap(this.getShips(), this.getSub(), 3);
 	}
 	public boolean checkShips(int x, char y, boolean vertical, String kind) {
 		for(int i = 0; i < ships.size(); i++) {
+
+			if(kind.equals("SUBMARINE")) {
+				return false;
+			}
+
 			if (ships.get(i).isTaken(x, y)) {
 				return true;
 			}
-			if(kind.equals(ships.get(i).getKind())) {
-				return true;
-			}
+
 			if (kind.equals("MINESWEEPER")) {
 				if (vertical) {
 					if (ships.get(i).isTaken(x + 1, y)) {

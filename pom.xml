@@ -28,6 +28,8 @@
                 <configuration>
                     <source>10</source>
                     <target>10</target>
+                    <enableAssertions>false</enableAssertions> <!-- ADDED LINE -->
+
                 </configuration>
             </plugin>
             <plugin>

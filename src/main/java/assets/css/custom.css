@@ -50,13 +50,17 @@ td:hover {
     background-color: green;
 }
 
-.sink {
-    background-color: red;
-}
+
 
 .cqhit {
     background-color: orange;
 }
+
+.sink {
+    background-color: red;
+}
+
+
 .place-text {
     font-size: 20px;
     margin-left: 25%;
@@ -82,12 +86,10 @@ td:hover {
 .catch_weapon {
     background: #ff9900;
     font-size: 18px;
-    margin-left: 25%;
-    margin-right: 25%;
     margin-bottom: 0;
     margin-top: 5%;
     font-weight: bold;
-    font-weight: bold;
+    max-block-size: 50px;
     text-align: center;
     color: white;
 }
@@ -302,7 +304,7 @@ body {
     margin-top: 0;
     border-radius: 3px;
     display: none;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .switch {
