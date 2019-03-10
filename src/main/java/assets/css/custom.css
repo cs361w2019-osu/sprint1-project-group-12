@@ -75,8 +75,21 @@ td:hover {
     margin-bottom: 0;
     margin-top: 5%;
     font-weight: bold;
+    text-align: center;
+}
+
+
+.catch_weapon {
+    background: #ff9900;
+    font-size: 18px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 0;
+    margin-top: 5%;
+    font-weight: bold;
     font-weight: bold;
     text-align: center;
+    color: white;
 }
 
 .unplaced {
@@ -249,7 +262,7 @@ body {
     display: flex;
     position: relative;
     text-align:center;
-    font-size: 100px;
+    font-size: 85px;
     font-weight: 100;
     margin: 0 0 20px 0;
     padding-top: 30px;
@@ -264,7 +277,7 @@ body {
 
 #ship-holder {
     background-color: #D3D3D3;
-    min-width: 225px;
+    min-width: 235px;
     max-width: 23%;
     padding-left: 10px;
     padding-right: 10px;
@@ -290,7 +303,6 @@ body {
     border-radius: 3px;
     display: none;
     font-size: 10px;
-
 }
 
 .switch {
@@ -335,6 +347,50 @@ body {
 #switch-holder {
     margin-top: 5%;
 }
+
+#switch-weapon {
+    margin-top: 5%;
+}
+
+.switch_new_laser{
+    margin-top: 5%;
+    appearance: none;
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: 27px;
+    border-radius: 3em;
+    background-color: #00FFFF;
+    outline: 0;
+    position: relative;
+}
+
+.switch_new_laser::after {
+    font-size: 19px;
+    content: 'bomb';
+    width: 105px;
+    height: 27px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 3em;
+    position: absolute;
+    transform: scale(0.7);
+    margin-left: 0;
+    left: -13px;
+    transition: left 0.15s ease-in-out;
+}
+
+.switch_new_laser:checked::after {
+    left: 48%;
+    text-align: center;
+    content: 'laser';
+
+}
+
 
 .popup {
   position: relative;
@@ -401,4 +457,99 @@ body {
     font-weight: bold;
     font-size:25px;
 
+}
+
+
+.place-laser{
+    display: flex;
+    position: fixed;
+}
+
+
+.button {
+  font-size: 1.5em;
+  padding: 10px;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  font-weight: bold;
+  right: 68px;
+  position: absolute;
+  top: 66px;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+  z-index:10;
+}
+
+.qbox {
+  margin: 0px auto;
+  background: #00ffff;
+  border-radius: 5px;
+  height: 27%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.qbox h2 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align:center
+
+
+}
+.qbox h3 {
+  color: #333;
+  font-size: 15px;
+  font-family: Tahoma, Arial, sans-serif;
+    text-align:center
+}
+.qbox h4 {
+  color: #333;
+  font-size: 12px;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align:center
+}
+.qbox .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.qbox .close:hover {
+  color: #06D85F;
+}
+.qbox .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .qbox{
+    width: 70%;
+  }
 }

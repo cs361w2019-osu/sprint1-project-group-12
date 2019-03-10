@@ -17,6 +17,9 @@ public class GameTest {
         Game game = new Game();
         Ship ship = new Minesweeper("MINESWEEPER");
         assertTrue(game.getOpponentsBoard().placeShip(ship, 5, 'A', false));
+        Ship ship2 = new Submarine("SUBMARINE");
+        assertTrue(game.getOpponentsBoard().placeShip(ship2, 8, 'A', false));
+        assertTrue(game.attack(8, 'A'));  
         assertTrue(game.attack(5, 'A'));
         assertFalse(game.attack(5, 'Z'));
     }

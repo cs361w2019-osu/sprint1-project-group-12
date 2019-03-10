@@ -17,8 +17,7 @@ var check_sonar = 0;
 var moveInt = 0;
 var check_move = 0;
 var flag = false;
-
-
+var use_weapon = "Bomb";
 
 function moveleft() {
     moveInt = 1;
@@ -56,7 +55,6 @@ function movedown() {
         redrawGrid();
     });
 }
-
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
     let row = document.createElement('tr');
@@ -69,43 +67,41 @@ function makeGrid(table, isPlayer) {
   }
 }
 
-function markHits(board, elementId, surrenderText) {
+
+
+function markHits(board, elementId, surrenderText, laser) {
 
   var result = 0;
   var loop = 0;
+  var x = 0;
 
   board.attacks.forEach((attack) => {
     loop +=1;
+        if (elementId == "player"){
+          player = 1;
+        }else if (elementId == "opponent"){
+          player = 2;
+        }
     let className;
     if (attack.result === "MISS"){
       className = "miss";
       message="You missed"
       result = 1;
 
-    }else if (attack.result === "HIT"){
+    } if (attack.result === "HIT"){
       className = "hit";
       message="You hit the opponents ship!"
       result = 2;
-
     }else if (attack.result === "SUNK"){
       className = "sink";
       message="You have SUNK an opponents ship!!"
       result = 3;
-
     }else if (attack.result === "SURRENDER"){
       result = 4;
-
     }else if (attack.result === "CQHIT"){
       message="You hit Captains Quarters!!"
       className = "cqhit";
       result = 2;
-
-    }
-    if (elementId == "player"){
-      player = 1;
-    }else if (elementId == "opponent"){
-      player = 2;
-
     }
 
     if (!document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.contains('sink')){
@@ -126,12 +122,9 @@ function markHits(board, elementId, surrenderText) {
   //Mark SUNK ships from the boards sunk array
 
   board.hits.forEach((square) => {
-
     document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sink");
-
   });
 }
-
 
 
 
@@ -159,26 +152,31 @@ function redrawGrid() {
 
   }));
 
-
   //TEST99!!!/
   //THIS PRINTS OPPONENTS MAP
   ////////
-/*
-  game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
 
-    if(square.row  == ship.capq.row && square.column == ship.capq.column){
-      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("capq");
-    }
-    else{
-      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
-    }
+//  game.opponentsBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
+
+//    if(square.row  == ship.capq.row && square.column == ship.capq.column){
+//    }
+//  else{
+//      document.getElementById("opponent").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
+//    }
 
 
-  }));*/
-  markHits(game.opponentsBoard, "opponent", "You won the game");
+//  }));
+  var x = 0;
+//  if( (message==="You hit the opponents ship!" || message==="You hit Captains Quarters!!" || message==="You have SUNK an opponents ship!!") && enemy_sunk >= 1){
+//    x = 1;
+  //  laserAttack(game.opponentsBoard, "opponent", "You won the game", 1);
+//  }
+
+if(x===0){
+  markHits(game.opponentsBoard, "opponent", "You won the game", 0);
+}
   fastmessage(message); //print result of hit message
-  markHits(game.playersBoard, "player", "You lost the game");
-
+  markHits(game.playersBoard, "player", "You lost the game", 0);
 }
 
 var oldListener;
@@ -220,8 +218,13 @@ function cellClick() {
                 var name = document.getElementById("place_battleship");
                 name.className = "grayout";
             }
+            if(shipType === "SUBMARINE") {
+                document.getElementById("place_submarine").removeEventListener("click", submarine);
+                var name = document.getElementById("place_submarine");
+                name.className = "grayout";
+            }
             placedShips++;
-            if (placedShips == 3) {
+            if (placedShips == 4) {
                 var shipDiv = document.getElementById("ship-holder");
                 var statsDiv = document.getElementById("stats-holder");
                 shipDiv.style.display = "none";
@@ -350,6 +353,7 @@ function hidemessage(){
     document.getElementById("place_minesweeper").addEventListener("click", minesweeper);
     document.getElementById("place_destroyer").addEventListener("click", destroyer);
     document.getElementById("place_battleship").addEventListener("click", battleship);
+    document.getElementById("place_submarine").addEventListener("click", submarine);
     sendXhr("GET", "/game", {}, function(data) {
       game = data;
     });
@@ -372,6 +376,12 @@ function hidemessage(){
     shipType = "BATTLESHIP";
     registerCellListener(place(4));
     document.getElementById("place_minesweeper").removeEventListener("click", battleship);
+  }
+  function submarine() {
+    shipType = "SUBMARINE";
+    registerCellListener(place(4));
+    document.getElementById("place_minesweeper").removeEventListener("click", submarine);
+
   }
 
 
@@ -428,7 +438,7 @@ function hidemessage(){
     }
 
     //Catch for end-game
-    if(enemy_sunk > 2)
+    if(enemy_sunk > 3)
     {   setTimeout(function()
       { alert(surrenderText);
         location.reload(true);
@@ -452,13 +462,22 @@ function hidemessage(){
     }
 
     //Catch for end-game
-    if(player_sunk > 2){
+    if(player_sunk > 3){
       setTimeout(function()
       { alert(surrenderText);
         location.reload(true);
       },500);
     }
 
+    if (enemy_sunk === 0){
+          use_weapon = "Bomb";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }else if(enemy_sunk >= 1){
+          use_weapon = "Laser";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }
   }
 function drawSonar(xrow, ycol){
   //  document.getElementById("opponent").rows[x-1].cells[y.charCodeAt(0)-'A'.charCodeAt(0)].classList.add("occupied");
@@ -514,6 +533,8 @@ function drawSonar(xrow, ycol){
     }
             isView = false;
    }));
+}
+
 
     if(check_sonar === 2) {
         var sonarDiv = document.getElementById("place_player_sonar");

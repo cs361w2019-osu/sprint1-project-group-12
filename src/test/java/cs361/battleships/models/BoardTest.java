@@ -29,7 +29,7 @@ public class BoardTest {
     public void testUniqueShips() {
         Board board = new Board();
         board.placeShip(new Minesweeper("MINESWEEPER"), 5, 'C', false);
-        assertFalse(board.placeShip(new Minesweeper("MINESWEEPER"), 6, 'B', false));
+        assertTrue(board.placeShip(new Submarine("SUBMARINE"), 5, 'C', false));
         assertTrue(board.placeShip(new Destroyer("DESTROYER"), 7, 'B', false));
         assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 4, 'A', false));
     }
@@ -40,7 +40,7 @@ public class BoardTest {
         board.placeShip(new Battleship("BATTLESHIP"), 6, 'C', true);
         assertTrue(board.attack(6, 'C').getResult() == AtackStatus.HIT);
         assertTrue(board.attack(7, 'C').getResult() == AtackStatus.HIT);
-        assertTrue(board.attack(7, 'C').getResult() == AtackStatus.INVALID);
+        assertTrue(board.attack(7, 'C').getResult() == AtackStatus.MISS);
         assertTrue(board.attack(11, 'C').getResult() == AtackStatus.INVALID);
     }
     @Test

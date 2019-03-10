@@ -1,10 +1,25 @@
 /<#import "../layout/defaultLayout.ftl.html" as layout>
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Home page">
+
+
 
 
 <!--<h1 id="head">&nbsp;&nbsp;The Battleship Game</h1>-->
 <title id="head">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;The Battleship Game</title>
 <link rel="short gif "  href="ship.gif"/>
+<div><a class="button" href="#popup1">NEED HELP</a></div>
+
+<div id="popup1" class="overlay">
+    <div class="qbox">
+        <h2>GAME INSTRUCTION </h2>
+        <h3>COLORS: BLACK: Players Ships &nbsp; GREEN: Players captains quarters &nbsp; BLUE: Missed attack &nbsp;  YELLOW: Hit square &nbsp;  ORANGE- Hit captains quarters &nbsp; RED: Sunk ship</h3>
+        <h4>Submarines: Special ship which is submerged, this allows you to 'overlap' with other ships. Submarines may not be hit until the space laser is unlocked. </h4>
+        <h3>TWO WEAPONS: BOMB & SPACE LASER</h3>
+        <h4>BOMB: can only hit the surface ships.&nbsp;&nbsp; &nbsp;&nbsp;SPACE LASER: after you sink the first ship, you can use the space laser which can hit both surface ships and submarines.</h4>
+        <a class="close" href="#">&times;</a>
+
+    </div>
+</div>
 
 <div class="top">
     <div class="name">MY SHIPS   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENEMY </div>
@@ -35,6 +50,8 @@
         <div><button id="place_destroyer" class="unplaced">⬛⬛⬛</button></div>
         <div id="battleship" class="place-text">Battleship</div>
         <div><button id="place_battleship" class="unplaced">⬛⬛⬛⬛</button></div>
+        <div id="submarine" class="place-text">Submarine</div>
+        <div><button id="place_submarine" class="unplaced">⬛⬛⬛⬛⬛</button></div>
         <div id="switch-holder">
             <input type="checkbox" class="switch" id="is_vertical"></input>
         </div>
@@ -88,9 +105,10 @@
         <span class="infotext2" id="myInfo2">Click one of the buttons in the middle and place your ships on the map to the left.
         You can place one of each ship.</span>
     </div>
-
+  <div id="update_weapon" class="catch_weapon" >Weapon: bomb</div>
 
 </div>
+
 <script type="text/javascript" src="/assets/game.js"></script>
 <script>
     initGame();
