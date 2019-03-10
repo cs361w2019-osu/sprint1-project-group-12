@@ -533,7 +533,7 @@ function drawSonar(xrow, ycol){
     }
             isView = false;
    }));
-}
+
 
 
     if(check_sonar === 2) {

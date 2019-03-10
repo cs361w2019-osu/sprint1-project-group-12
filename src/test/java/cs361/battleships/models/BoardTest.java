@@ -47,7 +47,7 @@ public class BoardTest {
     public void testCheckShip() {
         Board board = new Board();
         board.placeShip(new Minesweeper("MINESWEEPER"), 5, 'C', false);
-        assertTrue(board.checkShips(3, 'B', false, "MINESWEEPER"));
+        assertFalse(board.checkShips(3, 'B', false, "MINESWEEPER"));
         assertFalse(board.checkShips(3, 'B', false, "DESTROYER"));
         assertFalse(board.checkShips(3, 'B', false, "BATTLESHIP"));
         assertTrue(board.checkShips(5, 'C', false, "MINESWEEPER"));
@@ -59,6 +59,20 @@ public class BoardTest {
         assertFalse(board.checkShips(5, 'A', true, "DESTROYER"));
         assertFalse(board.checkShips(5, 'A', true, "BATTLESHIP"));
     }
+
+
+    @Test
+public void MoveTest() {
+    Board board = new Board();
+    assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', false));
+    assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'A', false));
+    assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'A', false));
+    assertTrue(board.moveShips(3));
+    assertTrue(board.moveShips(1));
+    assertTrue(board.moveShips(1));
+    assertTrue(board.moveShips(2));
+    assertTrue(board.moveShips(4));
+}
     @Test
     public void testPlacementVertical() {
         Board board = new Board();
@@ -72,17 +86,5 @@ public class BoardTest {
         assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', false));
         assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'A', false));
         assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'A', false));
-    }
-    @Test
-    public void MoveTest() {
-        Board board = new Board();
-        assertTrue(board.placeShip(new Minesweeper("MINESWEEPER"), 3, 'A', false));
-        assertTrue(board.placeShip(new Destroyer("DESTROYER"), 1, 'A', false));
-        assertTrue(board.placeShip(new Battleship("BATTLESHIP"), 2, 'A', false));
-        assertTrue(board.moveShips(3));
-        assertTrue(board.moveShips(1));
-        assertTrue(board.moveShips(1));
-        assertTrue(board.moveShips(2));
-        assertTrue(board.moveShips(4));
     }
 }
