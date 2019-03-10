@@ -2,24 +2,9 @@
 <@layout.myLayout "Home page">
 
 
-
-
 <!--<h1 id="head">&nbsp;&nbsp;The Battleship Game</h1>-->
 <title id="head">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;The Battleship Game</title>
 <link rel="short gif "  href="ship.gif"/>
-<div><a class="button" href="#popup1">NEED HELP</a></div>
-
-<div id="popup1" class="overlay">
-    <div class="qbox">
-        <h2>GAME INSTRUCTION </h2>
-        <h3>MY SHIP: black &nbsp; MY CAPTAINS QUARTERS: green &nbsp; HIT CAPTAIN'S QUARTERS: orange &nbsp; MISS: blue &nbsp; HIT: yellow &nbsp; SINK: red</h3>
-        <h4>Submarine: it can be placed on the surface or it can be submerged, and thus be placed on the grid under any other type of surface ship. </h4>
-        <h3>TWO WEAPON: BOMB & SPACE LASER</h3>
-        <h4>Bomb: can only hit the surface ship.&nbsp;&nbsp; &nbsp;&nbsp;Space laser: after you sink the first ship, you can use the space laser that can hit both a surface ship and a sub one.</h4>
-        <a class="close" href="#">&times;</a>
-
-    </div>
-</div>
 
 <div class="top">
     <div class="name">MY SHIPS   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENEMY </div>
@@ -50,6 +35,8 @@
         <div><button id="place_destroyer" class="unplaced">⬛⬛⬛</button></div>
         <div id="battleship" class="place-text">Battleship</div>
         <div><button id="place_battleship" class="unplaced">⬛⬛⬛⬛</button></div>
+        <div id="submarine" class="place-text">Submarine</div>
+        <div><button id="place_submarine" class="unplaced">⬛⬛⬛⬛⬛</button></div>
         <div id="switch-holder">
             <input type="checkbox" class="switch" id="is_vertical"></input>
         </div>

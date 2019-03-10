@@ -32,6 +32,9 @@ public class ApplicationController {
         if(g.getShipType().equals("BATTLESHIP")) {
             ship = new Battleship(g.getShipType());
         }
+        if(g.getShipType().equals("SUBMARINE")) {
+            ship = new Submarine(g.getShipType());
+        }
         boolean result = game.placeShip(ship, g.getActionRow(), g.getActionColumn(), g.isVertical());
 
 
