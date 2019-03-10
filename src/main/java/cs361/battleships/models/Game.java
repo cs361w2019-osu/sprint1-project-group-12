@@ -17,12 +17,10 @@ public class Game {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-        System.out.printf("PLAYER: %d %c\n", x, y);
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
         if (!successful) {
             return false;
         }
-        System.out.println("ENEMY");
         boolean opponentPlacedSuccessfully;
         do {
             // AI places random ships, so it might try and place overlapping ships
@@ -60,6 +58,12 @@ public class Game {
 
         return true;
     }
+
+    public boolean moveShips(int moveInt) {
+        boolean flag = playersBoard.moveShips(moveInt);
+        return flag;
+    }
+
     public Board getPlayersBoard() {
         return playersBoard;
     }

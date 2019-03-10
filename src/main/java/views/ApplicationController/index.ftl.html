@@ -41,15 +41,27 @@
     </div>
 
     <div id="stats-holder">
-        <div id="stats" class="place-text">Stats</div>
-        <div id="player1" class="place-text">Your stats</div>
+        <div id="player1" class="stats-text">Your stats</div>
         <div id="enemy_hit" class="stats">Hits: 0</div>
         <div id="enemy_miss" class="stats">Misses: 0</div>
         <div id="enemy_sunk" class="stats">Ships Sunk: 0</div>
-        <div id="opponent1" class="place-text">Opponent's stats</div>
+        <div id="opponent1" class="stats-text">Opponent's stats</div>
         <div id="player_hit" class="stats">Hits: 0</div>
         <div id="player_miss" class="stats">Misses: 0</div>
         <div id="player_sunk" class="stats">Sunk: 0</div>
+        <div class="actions">
+            <div class="top_but">
+                <div><button id="move_up" class="move_but_grey">&#x21D1;</button></div>
+            </div>
+            <div class="horizontal">
+                <div><button id="move_left" class="move_but_grey">&#x21D0;</button></div>
+                <div><button id="place_player_sonar" class="buttonGrey">Sonar Pulse</button></div>
+                <div><button id="move_right" class="move_but_grey">&#x21D2;</button></div>
+            </div>
+            <div class="bottom_but">
+                <div><button id="move_down" class="move_but_grey">&#x21D3;</button></div>
+            </div>
+        </div>
     </div>
 
     <table id="opponent" class="battleGrid">
@@ -76,9 +88,7 @@
         <span class="infotext2" id="myInfo2">Click one of the buttons in the middle and place your ships on the map to the left.
         You can place one of each ship.</span>
     </div>
-    <div class="sonar">
-        <div><button id="place_player_sonar" class="buttonable">Sonar Pulse</button></div>
-    </div>
+
 
 </div>
 <script type="text/javascript" src="/assets/game.js"></script>

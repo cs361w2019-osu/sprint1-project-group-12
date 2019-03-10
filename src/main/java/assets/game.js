@@ -14,6 +14,48 @@ var message="blank";
 var opacity=1;
 var isView = false;
 var check_sonar = 0;
+var moveInt = 0;
+var check_move = 0;
+var flag = false;
+
+
+
+function moveleft() {
+    moveInt = 1;
+    result = 0;
+    sendXhr("POST", "/move", {game: game, moveInt: moveInt}, function(data) {
+        game = data;
+        check_move++;
+        redrawGrid();
+    });
+}
+function moveup() {
+    moveInt = 2;
+    result = 0;
+    sendXhr("POST", "/move", {game: game, moveInt: moveInt}, function(data) {
+        game = data;
+        check_move++;
+        redrawGrid();
+    });
+}
+function moveright() {
+    moveInt = 3;
+    result = 0;
+    sendXhr("POST", "/move", {game: game, moveInt: moveInt}, function(data) {
+        game = data;
+        check_move++;
+        redrawGrid();
+    });
+}
+function movedown() {
+    moveInt = 4;
+    result = 0;
+    sendXhr("POST", "/move", {game: game, moveInt: moveInt}, function(data) {
+        game = data;
+        check_move++;
+        redrawGrid();
+    });
+}
 
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
@@ -33,7 +75,7 @@ function markHits(board, elementId, surrenderText) {
   var loop = 0;
 
   board.attacks.forEach((attack) => {
-    loop +=1
+    loop +=1;
     let className;
     if (attack.result === "MISS"){
       className = "miss";
@@ -70,8 +112,17 @@ function markHits(board, elementId, surrenderText) {
       document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
     }
   });
+    if(flag == true) {
+        moveInt = 0;
+        result = 0;
+        flag = false;
+    }
+    if(moveInt != 0) {
+        result = 0;
+        flag = true;
+    }
+    updatelog(player, result,surrenderText);
 
-     updatelog(player, result,surrenderText);
   //Mark SUNK ships from the boards sunk array
 
   board.hits.forEach((square) => {
@@ -79,8 +130,6 @@ function markHits(board, elementId, surrenderText) {
     document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("sink");
 
   });
-
-
 }
 
 
@@ -126,10 +175,10 @@ function redrawGrid() {
 
 
   }));*/
-
   markHits(game.opponentsBoard, "opponent", "You won the game");
   fastmessage(message); //print result of hit message
   markHits(game.playersBoard, "player", "You lost the game");
+
 }
 
 var oldListener;
@@ -175,21 +224,17 @@ function cellClick() {
             if (placedShips == 3) {
                 var shipDiv = document.getElementById("ship-holder");
                 var statsDiv = document.getElementById("stats-holder");
-                var sonarDiv = document.getElementById("place_player_sonar");
                 shipDiv.style.display = "none";
-                sonarDiv.style.display = "block";
                 statsDiv.style.display = "block";
                 document.getElementById("myInfo").innerHTML="Now Attacking:";
-
                 document.getElementById("myInfo2").innerHTML="Click the map on the right to attack squares. Try hit your opponents ships. Sink all enemy ships before they get yours to win!!";
 
                 isSetup = false;
                 registerCellListener((e) => {});
             }
         });
-
-    }else if (isView){
-                 drawSonar(row, col);
+    }else if(isView) {
+        drawSonar(row, col);
     } else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
@@ -197,7 +242,6 @@ function cellClick() {
         })
     }
 }
-document.getElementById("place_player_sonar").addEventListener("click", place_player_sonar);
 
 function place_player_sonar(){
     if (enemy_sunk >= 1 && check_sonar < 2){
@@ -221,9 +265,12 @@ function sendXhr(method, url, data, handler) {
             message="Please choose a ship to place!!"
           }
         }
-        if(!isSetup)
-        message="Please choose a new square"
-        errormessage(message);
+        if(!isSetup && moveInt == 0) {
+            message="Please choose a new square"
+        }
+        if(moveInt == 0) {
+            errormessage(message);
+        }
 
         return;
       }
@@ -319,14 +366,12 @@ function hidemessage(){
     shipType = "DESTROYER";
     registerCellListener(place(3));
     document.getElementById("place_minesweeper").removeEventListener("click", destroyer);
-
   }
 
   function battleship() {
     shipType = "BATTLESHIP";
     registerCellListener(place(4));
     document.getElementById("place_minesweeper").removeEventListener("click", battleship);
-
   }
 
 
@@ -351,6 +396,37 @@ function hidemessage(){
       document.getElementById("enemy_sunk").innerHTML = "Sunk: " + enemy_sunk;
       document.getElementById("enemy_hit").innerHTML = "Hit: " + enemy_hit;
     }
+    if(enemy_sunk > 0 && check_sonar < 2) {
+      var sonarDiv = document.getElementById("place_player_sonar");
+      sonarDiv.className = "buttonable";
+      document.getElementById("place_player_sonar").addEventListener("click", place_player_sonar);
+    }
+
+    if(enemy_sunk > 1 && check_move < 2) {
+        result = 0;
+        document.getElementById("move_left").addEventListener("click", moveleft);
+        document.getElementById("move_right").addEventListener("click", moveright);
+        document.getElementById("move_up").addEventListener("click", moveup);
+        document.getElementById("move_down").addEventListener("click", movedown);
+
+        document.getElementById("move_left").className = "move_but";
+        document.getElementById("move_right").className = "move_but";
+        document.getElementById("move_up").className = "move_but";
+        document.getElementById("move_down").className = "move_but";
+    }
+
+    if(check_move > 1) {
+        document.getElementById("move_left").removeEventListener("click", moveleft);
+        document.getElementById("move_right").removeEventListener("click", moveright);
+        document.getElementById("move_up").removeEventListener("click", moveup);
+        document.getElementById("move_down").removeEventListener("click", movedown);
+
+        document.getElementById("move_left").className = "move_but_grey";
+        document.getElementById("move_right").className = "move_but_grey";
+        document.getElementById("move_up").className = "move_but_grey";
+        document.getElementById("move_down").className = "move_but_grey";
+    }
+
     //Catch for end-game
     if(enemy_sunk > 2)
     {   setTimeout(function()
@@ -439,5 +515,9 @@ function drawSonar(xrow, ycol){
             isView = false;
    }));
 
-
+    if(check_sonar === 2) {
+        var sonarDiv = document.getElementById("place_player_sonar");
+        document.getElementById("place_player_sonar").removeEventListener("click", place_player_sonar);
+        sonarDiv.className = "buttonGrey";
+    }
 }

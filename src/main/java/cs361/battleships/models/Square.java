@@ -14,6 +14,33 @@ public class Square {
 		this.column = column;
 	}
 
+	public boolean outOfBounds(int moveInt) {
+		int temp;
+		if(moveInt == 1) {
+			temp = column;
+			if(temp - 1 < 65) {
+				return true;
+			}
+		}
+		if(moveInt == 2) {
+			if(row - 1 < 1) {
+				return true;
+			}
+		}
+		if(moveInt == 3) {
+			temp = column;
+			if(temp + 1 > 74) {
+				return true;
+			}
+		}
+		if(moveInt == 4) {
+			if(row + 1 > 10) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public char getColumn() {
 		return column;
 	}

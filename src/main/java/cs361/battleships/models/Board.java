@@ -41,8 +41,101 @@ public class Board {
 		return true;
 	}
 
+	public boolean moveShips(int moveInt) {
+		List<Ship> failedShips = new ArrayList<>();
+		boolean flag = false;
+		for(int i = 0; i < ships.size(); i++) {
+			boolean flag2 = true;
+			flag = true;
+			for(int j = 0; j < ships.get(i).getOccupiedSquares().size(); j++) {
+				if (moveInt != 0) {
+					if (checkLocation(ships.get(i).getOccupiedSquares().get(j), ships.get(i).getKind(), moveInt)) {
+						flag = false;
+					}
+				}
+				if(ships.get(i).getOccupiedSquares().get(j).outOfBounds(moveInt)) {
+					flag2 = false;
+				}
+			}
+			if(flag == true && flag2 == true) {
+				if (moveInt == 1) {
+					ships.get(i).moveLeft();
+				}
+				if (moveInt == 2) {
+					ships.get(i).moveUp();
+				}
+				if (moveInt == 3) {
+					ships.get(i).moveRight();
+				}
+				if (moveInt == 4) {
+					ships.get(i).moveDown();
+				}
+			}
+			if (flag == false) {
+				failedShips.add(ships.get(i));
+			}
+		}
+		for(int i = 0; i < failedShips.size(); i++) {
+			flag = true;
+			boolean flag2 = true;
+			for(int j = 0; j < failedShips.get(i).getOccupiedSquares().size(); j++) {
+				if (moveInt != 0) {
+					if(checkLocation(failedShips.get(i).getOccupiedSquares().get(j), failedShips.get(i).getKind(), moveInt)) {
+						flag = false;
+					}
+				}
+				if(failedShips.get(i).getOccupiedSquares().get(j).outOfBounds(moveInt)) {
+					flag2 = false;
+				}
+			}
+			if(flag == true && flag2 == true) {
+				if (moveInt == 1) {
+					failedShips.get(i).moveLeft();
+				}
+				if (moveInt == 2) {
+					failedShips.get(i).moveUp();
+				}
+				if (moveInt == 3) {
+					failedShips.get(i).moveRight();
+				}
+				if (moveInt == 4) {
+					failedShips.get(i).moveDown();
+				}
+			}
+		}
+		return true;
+	}
 
-
+	public boolean checkLocation(Square square, String type, int moveInt) {
+		int x = 0, y = 0;
+		switch(moveInt) {
+			case 1: y = -1; x = 0;
+				break;
+			case 2: y = 0; x = -1;
+				break;
+			case 3: y = 1; x = 0;
+				break;
+			case 4: y = 0; x = 1;
+				break;
+		}
+		for(int i = 0; i < ships.size(); i++) {
+			if(ships.get(i).getKind() != type && ships.get(i).getKind() != "SUBMARINE") {
+				for (int j = 0; j < ships.get(i).getOccupiedSquares().size(); j++) {
+					if (ships.get(i).getOccupiedSquares().get(j).getColumn() == ((char)((int)square.getColumn() + y))
+						&& ships.get(i).getOccupiedSquares().get(j).getRow() == (square.getRow() + x)) {
+						return true;
+					}
+				}
+			}
+		}
+		for(int i = 0; i < hits.size(); i++) {
+			if(hits.get(i).getColumn() == ((char)((int)square.getColumn() + y))
+				&& hits.get(i).getRow() == (square.getRow() + x)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 
 
