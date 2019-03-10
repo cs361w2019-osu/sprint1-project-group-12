@@ -9,6 +9,8 @@ public class GameTest {
     @Test
     public void testGamePlace() {
       Game game = new Game();
+      assertTrue(game.placeShip(new Submarine("SUBMARINE"), 3, 'A', false));
+      assertTrue(game.moveShips(2));
       Ship ship = new Minesweeper("MINESWEEPER");
       assertTrue(game.placeShip(ship, 5, 'A', false));
     }
@@ -18,6 +20,7 @@ public class GameTest {
         Ship ship = new Minesweeper("MINESWEEPER");
         assertTrue(game.getOpponentsBoard().placeShip(ship, 5, 'A', false));
         Ship ship2 = new Submarine("SUBMARINE");
+        assertTrue(game.getOpponentsBoard().placeShip(ship2, 8, 'A', false));
         assertTrue(game.getOpponentsBoard().placeShip(ship2, 8, 'A', false));
         assertTrue(game.attack(8, 'A'));  
         assertTrue(game.attack(5, 'A'));
