@@ -13,16 +13,16 @@ public class Game {
     @JsonProperty private Board playersBoard = new Board();
     @JsonProperty private Board opponentsBoard = new Board();
 
+
+
     /*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
     public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-        System.out.printf("PLAYER: %d %c\n", x, y);
         boolean successful = playersBoard.placeShip(ship, x, y, isVertical);
         if (!successful) {
             return false;
         }
-        System.out.println("ENEMY");
         boolean opponentPlacedSuccessfully;
         do {
             // AI places random ships, so it might try and place overlapping ships
@@ -37,8 +37,28 @@ public class Game {
             if(ship.getKind().equals("BATTLESHIP")) {
                 ship2 = new Battleship(ship.getKind());
             }
-            opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
+            if(ship.getKind().equals("SUBMARINE")) {
+                ship2 = new Submarine(ship.getKind());
+                playersBoard.setSub(playersBoard.getShips().size()-1);
+                opponentsBoard.setSub(playersBoard.getShips().size()-1);
+            }
+
+         opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, randRow(), randCol(), randVertical());
+      //Opponent place same as player test
+      //    opponentPlacedSuccessfully = opponentsBoard.placeShip(ship2, x, y, isVertical);
+
         } while (!opponentPlacedSuccessfully);
+
+
+
+        //ADJUST TO MAKE SUB ALWAYS LAST SHIP IN SHIP-list
+
+      if(playersBoard.getShips().size() == 4){
+              if(playersBoard.getSub() != playersBoard.getShips().size()-1){
+                 playersBoard.adjustSub();
+                 opponentsBoard.adjustSub();
+              }
+      }
         return true;
     }
 
