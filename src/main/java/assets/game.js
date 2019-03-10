@@ -14,6 +14,8 @@ var message="blank";
 var opacity=1;
 var isView = false;
 var check_sonar = 0;
+var use_weapon = "Bomb";
+
 
 function makeGrid(table, isPlayer) {
   for (i=0; i<10; i++) {
@@ -414,6 +416,15 @@ function hidemessage(){
       },500);
     }
 
+    if (enemy_sunk === 0){
+          use_weapon = "Bomb";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }else if(enemy_sunk >= 1){
+          use_weapon = "Laser";
+          //console.log(use_weapon);
+          document.getElementById("update_weapon").innerHTML="Weapon: " + use_weapon;
+      }
   }
 function drawSonar(xrow, ycol){
   //  document.getElementById("opponent").rows[x-1].cells[y.charCodeAt(0)-'A'.charCodeAt(0)].classList.add("occupied");
