@@ -10,6 +10,7 @@ public class GameTest {
     public void testGamePlace() {
       Game game = new Game();
       assertTrue(game.placeShip(new Submarine("SUBMARINE"), 3, 'A', false));
+      assertTrue(game.placeShip(new Battleship("BATTLESHIP"), 3, 'A', false));
       assertTrue(game.moveShips(2));
       Ship ship = new Minesweeper("MINESWEEPER");
       assertTrue(game.placeShip(ship, 5, 'A', false));
